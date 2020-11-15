@@ -4,7 +4,7 @@ import ply.lex as lex
 reserved = {'def': 'DEF', 'defn': 'DEFN', 'nil': 'NULL', 'true': 'BOOLEAN', 'false': 'BOOLEAN',
             'and': 'AND', 'or': 'OR', 'not': 'NOT', 'if': 'IF', 'else': 'ELSE', 'println': 'Function',
             'set': 'SET', 'union': 'UNION', 'difference': 'DIFFERENCE', 'intersection': 'INTERSECTION',
-            }
+            'while':'WHILE', 'do':'DO'}
 
 # List of token names.
 tokens = (
@@ -22,6 +22,11 @@ tokens = (
 'FLOAT',
 'EQUAL',
 'NOTEQUAL',
+'STRING',
+'GREATERTHAN',
+'LESSTHAN',
+'GREATERTHANEQUALS',
+'LESSTHANEQUALS',
 ) + tuple(reserved.values())
 
 # Regular expression rules for simple tokens
@@ -38,10 +43,18 @@ t_NUMBER = r'\d+'
 t_FLOAT = r'\d+\.\d+'
 t_EQUAL =  r'='
 t_NOTEQUAL =  r'not='
-
+t_GREATERTHAN = r'\>'
+t_LESSTHAN= r'\<'
+t_GREATERTHANEQUALS=r'\>\='
+t_LESSTHANEQUALS=r'\<\='
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
     t.type = reserved.get(t.value, 'ID')
+    return t
+
+def t_STRING(t):
+    r'"[^"]*"'
+    t.type=reserved.get(t.value, 'STRING')
     return t
 
 # Define a rule so we can track line numbers
