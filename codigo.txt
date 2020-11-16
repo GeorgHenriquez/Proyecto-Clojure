@@ -1,0 +1,87 @@
+# ESTO ES UN COMENTARIO 
+#
+#4.1. TIPOS DE DATO
+(def x 1)
+(def bool false)
+(def var nil)
+(def str "Hello World")
+(def conjunto (set '(1 2 3 3 4)))
+(def conjunto #{1 2 3 4})
+(println (vector 1 2 3))
+(def v (vector "a" "b" "c"))
+(def v ["x" "y" "z"])
+(def lista '(1 2 3 3 4))
+(def conjunto (list false "x" 3))
+#
+#4.2. OPERADORES ARITMETICOS
+(+ 1 3 4)
+(- 4 2)
+(* 4 3)
+(/ 10 2)
+#
+#4.3. OPERADORES LOGICOS
+(and true false)
+(or false true)
+(not true)
+#
+#4.4. OPERADORES DE COMPARACION
+(= 3 3)
+(not= 4 4)
+(< 2 3)
+(> 2 3)
+(<= 4 5)
+(>= 5 3)
+#
+#4.5. IMPRESION DE UN STRING
+(println "Hello World")
+#4.6. ENTRADA DE UN STRING (INPUT)
+(read-line)
+#
+#4.7. FUNCIONES CON STRING
+(empty? "0123")
+(str "foo" "bar")
+(subs "0123" 1)
+(seq "foo")
+#
+#4.8. FUNCIONES CON ARREGLOS
+([1 2 3])
+(get ["abc" false 99] 0)
+(count [1 2 3])
+(conj [1 2 3] 4 5 6)
+(def cards '(10 :ace :jack 9))
+#
+#4.9 FUNCIONES CON CONJUNTOS
+(require '[clojure.set :as set])
+(def x (set '(1 2 3 4)))
+(def y (set '(4 5 6 7)))
+(set/union x y)
+(require '[clojure.set :as set])
+(def x (set '(1 2 3 4)))
+(def y (set '(4 5 6 7)))
+(set/difference x y)
+(require '[clojure.set :as set])
+(def x (set '(1 2 3 4)))
+(def y (set '(4 5 6 7)))
+(set/intersection x y)
+#
+#4.10 FUNCIONES CON INDEXACION
+(-> (.fetch js/window "https://api.github.com/users/seisvelas/gists")
+(.then #(.json %))
+ReadableStream (.then#(.log js/epi %))
+#
+#4.11 SLICING
+(def x (list 1 2 3 4))
+(take 3 x)
+(drop 3 x)
+#
+#4.12 ESTRUCTURAS DE CONTROL BASICAS
+(def x (list 1 2 3 4))
+(doseq [n x]
+(println n))
+(def x (atom 5))
+(while (< @x 7) (do (println @x) (swap! x inc)))
+(def x (atom 5))
+(if ( = x 2) (println "Son iguales")(println "No son iguales"))
+#TERMINAR EL DOCUMENTO CON UNA LINEA VACIA
+
+#
