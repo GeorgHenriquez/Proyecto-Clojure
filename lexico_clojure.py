@@ -50,7 +50,7 @@ t_RPAREN  = r'\)'
 t_LCURLYBRA = r'\{'
 t_RCURLYBRA = r'\}'
 t_SETDEF = r'\#'
-t_NUMBER = r'\d+'
+#t_NUMBER = r'\d+'
 t_FLOAT = r'\d+\.\d+'
 t_EQUAL =  r'='
 t_NOTEQUAL =  r'not='
@@ -68,6 +68,13 @@ t_PERCENTAJE  = r'\%'
 t_AT  = r'\@'
 t_EXCLAMATION  = r'\!'
 
+
+#Esta ER fue añadidad para poder obtener el resultado de las operaciones
+#entre enteros
+def t_NUMBER(t):
+    r'\d+'
+    t.value = int(t.value)
+    return t
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
@@ -107,7 +114,7 @@ while linea!= "":
             break      # No more input
         print(tok)
     linea = input("-> ")
-"""
+
 
 #Funcion para oder analizar un solo string 
 def analizar(data):
@@ -126,4 +133,4 @@ for linea in archivo:
         if len(linea)==0:
             break
 
-
+"""
