@@ -14,6 +14,8 @@
 (def conjunto (list false "x" 3))
 #
 #4.2. OPERADORES ARITMETICOS
+(+ (* x 10) 4.3)
+(+ (-9 20) 10)
 (+ 1 3 4)
 (- 4 2)
 (* 4 3)
@@ -65,9 +67,9 @@
 (set/intersection x y)
 #
 #4.10 FUNCIONES CON INDEXACION
-(-> (.fetch js/window "https://api.github.com/users/seisvelas/gists")
-(.then #(.json %))
-ReadableStream (.then#(.log js/epi %))
+(def v (vector 1 3 5 7))
+(def item (get v 2))
+(println (nth (list false "Hola" 3) 2))
 #
 #4.11 SLICING
 (def x (list 1 2 3 4))
