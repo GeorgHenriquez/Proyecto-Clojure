@@ -4,7 +4,7 @@ import ply.lex as lex
 reserved = {'def': 'DEF', 'defn': 'DEFN', 'nil': 'NULL', 'true': 'BOOLEAN_TRUE', 'false': 'BOOLEAN_FALSE',
             'and': 'AND', 'or': 'OR', 'not': 'NOT', 'if': 'IF', 'else': 'ELSE', 'println': 'FUNCTION_PRINTLN',
             'set': 'SET', 'union': 'UNION', 'difference': 'DIFFERENCE', 'intersection': 'INTERSECTION',
-            'while':'WHILE', 'do':'DO', 'doseq':'FOR', 'read-line':'READ_LINE', 'empty?':'FUNCTION_EMPTY',
+            'while':'WHILE', 'do':'DO', 'doseq':'FOR', 'read':'READ','line':'LINE', 'empty':'FUNCTION_EMPTY',
             'str':'TYPE_STR', 'subs':'FUNCTION_SUB', 'seq':'FUNCTION_SEQ', 'get':'FUNCTION_GET', 'count':'FUNCTION_COUNT',
             'conj':'FUNCTION_CONJ', 'vector': 'VECTOR', 'list': 'LIST', 'nth': 'FUNCTION_NTH'}
 
