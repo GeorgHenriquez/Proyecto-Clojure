@@ -230,7 +230,7 @@ def prueba():
     print(result)
 
 #Funcion para probar -Marck Murillo
-def prueba2():
+def prueba1():
      print("Prueba Murillo")
      linea = "(println \"Ingrese su nombre: \")"
      print("clojure > " + linea)
@@ -262,9 +262,31 @@ def prueba2():
      print(result)
 
      
-#prueba()
-prueba2()
 
+
+
+#Función para probar -Ordóñez
+def prueba_2():
+    print("Prueba creación de lista")
+    linea = "(list 1 2 3)"
+    print("clojure > "+linea)
+    result = parser.parse(linea)
+    print(result)
+    print("Prueba unión dos sets")
+    linea = "(set/union '(1 2 3) '(1 2 4))"
+    print("clojure > " + linea)
+    print(result)
+    result = parser.parse(linea)
+    print(result)
+    print("Prueba de funcion take")
+    linea = "(take 1 [1 2 3])"
+    print("clojure > " + linea)
+    result = parser.parse(linea)
+    print(result)
+
+prueba_2()
+prueba()
+prueba1()
 
 # Error rule for syntax errors
 def p_error(p):
