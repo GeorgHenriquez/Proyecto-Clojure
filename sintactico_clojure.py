@@ -273,7 +273,7 @@ def prueba_2():
     result = parser.parse(linea)
     print(result)
     print("Prueba unión dos sets")
-    linea = "(set/union '(1 2 3) '(1 2 4))"
+    linea = "(set/union #{1 2 3} #{1 2 4})"
     print("clojure > " + linea)
     print(result)
     result = parser.parse(linea)
@@ -283,8 +283,19 @@ def prueba_2():
     print("clojure > " + linea)
     result = parser.parse(linea)
     print(result)
+    print("Prueba de funcion drop")
+    linea = "(drop 1 [1 2 3])"
+    print("clojure > " + linea)
+    result = parser.parse(linea)
+    print(result)
+    print("Prueba de diferencia dos sets")
+    linea = "(set/difference #{1 2 3} #{1 2 4})"
+    print("clojure > " + linea)
+    result = parser.parse(linea)
+    print(result)
 
 prueba_2()
+
 prueba()
 prueba1()
 
