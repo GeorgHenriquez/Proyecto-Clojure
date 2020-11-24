@@ -9,8 +9,8 @@ def p_stament(p):
           p[0] = p[2]
 
 def p_compute(p):
-     '''compute : expression
-                | function'''
+     '''compute : function
+                | general_expression'''
      p[0] = p[1]
 
 ### Funciones escritas por Marck Murillo
@@ -73,7 +73,10 @@ def p_list(p):
         | LPAREN LIST multipleObjects RPAREN'''
 
 def p_sequential_colls(p):
-    'sequential_colls : vector | set | list | ID'
+    '''sequential_colls : vector 
+    | set 
+    | list 
+    | ID'''
 
 def p_set(p):
     '''set : SETDEF LCURLYBRA multipleObjects RCURLYBRA
@@ -96,54 +99,141 @@ def p_function_drop(p):
 
 
 ### Fin funciones escritas por Franklin Ordóñez
-def p_expression_plus(p):
-     'expression : expression PLUS term'
-     p[0] = p[1] + p[3]
- 
-def p_expression_minus(p):
-    'expression : expression MINUS term'
-    p[0] = p[1] - p[3]
 
-def p_expression_term(p):
-    'expression : term'
+#Funciones escritas por George Henriquez
+###Operaciones aritmeticas - George Henriquez
+def p_general_expression(p):
+    '''general_expression : math_operation
+                          | bool_operation
+                          | compare_operation
+                          | variable_expression'''
     p[0] = p[1]
 
-def p_term_times(p):
-    'term : term TIMES factor'
-    p[0] = p[1] * p[3]
-
-def p_term_div(p):
-    'term : term DIVIDE factor'
-    p[0] = p[1] / p[3]
-
-def p_term_factor(p):
-    'term : factor'
-    p[0] = p[1]
-
-def p_factor_num(p):
-    'factor : NUMBER'
-    p[0] = p[1]
-
-def p_factor_expr(p):
-    'factor : LPAREN expression RPAREN'
+def p_num_expression(p):
+    '''num_expression : LPAREN math_operation RPAREN'''
     p[0] = p[2]
 
+def p_operation_plus(p):
+    '''math_operation : PLUS num_expression NUMBER'''
+    p[0] = p[2] + p[3]
 
-# Error rule for syntax errors
-def p_error(p):
-    print("Syntax error in input!")
+def p_operation_minus(p):
+    '''math_operation : MINUS num_expression NUMBER'''
+    p[0] = p[2] - p[3]
+
+def p_operation_divide(p):
+    '''math_operation : DIVIDE num_expression NUMBER'''
+    p[0] = p[2] / p[3]
+
+def p_operation_times(p):
+    '''math_operation : TIMES num_expression NUMBER'''
+    p[0] = p[2] * p[3]
+
+def p_number(p): 
+    '''num_expression : NUMBER '''
+    p[0] = p[1]
+
+###Operaciones Booleanas - George Henriquez
+def p_boolean_expression(p):
+     'bool_expression : LPAREN bool_operation RPAREN'
+     p[0] = p[2]
+
+def p_bool_operation_and(p):
+     '''bool_operation : AND bool_expression bool_expression'''
+     p[0] = p[2] and p[3]
+
+def p_bool_operation_or(p):
+     '''bool_operation : OR bool_expression bool_expression'''
+     p[0] = p[2] or p[3]
+
+def p_bool_operation_not(p):
+     '''bool_operation : NOT bool_expression'''
+     p[0] = not p[2]
+
+def p_bool_type(p):
+     '''bool_expression : BOOLEAN_TRUE
+     | BOOLEAN_FALSE'''
+     p[0] = p[1]
+
+###Operaciones de Comparacion - George Henriquez
+def p_compare_operation_greaterthan(p):
+     'compare_operation : GREATERTHAN num_expression num_expression'
+     p[0] = p[2] > p[3]
+
+def p_compare_operation_lessthan(p):
+     'compare_operation : LESSTHAN num_expression num_expression'
+     p[0] = p[2] < p[3]
+
+def p_compare_operation_greaterthan_equals(p):
+     'compare_operation : GREATERTHANEQUALS num_expression num_expression'
+     p[0] = p[2] >= p[3]
+
+def p_compare_operation_lessthan_equals(p):
+     'compare_operation : LESSTHANEQUALS num_expression num_expression'
+     p[0] = p[2] <= p[3]
+
+def p_compare_operation_equal(p):
+     'compare_operation : EQUAL num_expression num_expression'
+     p[0] = p[2] == p[3]
+
+def p_compare_operation_notequal(p):
+     'compare_operation : NOTEQUAL num_expression num_expression'
+     p[0] = p[2] != p[3]
+
+###Variables - George Henriquez
+def p_variable_expression_string(p):
+     '''variable_expression : DEF ID STRING''' 
+     p[0] = f'variable_expression: STRING' 
+
+def p_variable_expression_number(p):
+     '''variable_expression : DEF ID NUMBER
+                                   | FLOAT''' 
+     p[0] = f'variable_expression: NUMBER' 
+
+def p_variable_expression_boolean(p):
+     '''variable_expression : DEF ID BOOLEAN_TRUE
+                                   | BOOLEAN_FALSE''' 
+     p[0] = f'variable_expression: BOOLEAN' 
+
 
 # Build the parser
 parser = yacc.yacc()
 
-while True:
-   try:
-       s = input('clojure > ')
-   except EOFError:
-       break
-   if not s: continue
-   result = parser.parse(s)
-   print(result)
+#Funcion para probar -Henriquez
+def prueba():
+    print("Prueba Operaciones")
+    linea = "(+ (* (- 8 4) 2) 2)"
+    print("clojure > " + linea)
+    result = parser.parse(linea)
+    print(result)
+    linea = "(> 9 2)"
+    print("clojure > " + linea)
+    result = parser.parse(linea)
+    print(result)
+    linea = "(def variable true)"
+    print("clojure > " + linea)
+    result = parser.parse(linea)
+    print(result)
+    linea = "(and true false)"
+    print("clojure > " + linea)
+    result = parser.parse(linea)
+    print(result)
+
+prueba()
+# Error rule for syntax errors
+def p_error(p):
+    print("Syntax error in input!")
+
+
+
+# while True:
+#    try:
+#        s = input('clojure > ')
+#    except EOFError:
+#        break
+#    if not s: continue
+#    result = parser.parse(s)
+#    print(result)
 
 
 
