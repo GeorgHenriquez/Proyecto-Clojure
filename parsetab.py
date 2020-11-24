@@ -5,9 +5,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'NUMBER PLUS MINUS TIMES DIVIDE LPAREN RPAREN LCURLYBRA RCURLYBRA SETDEF ID FLOAT EQUAL NOTEQUAL STRING GREATERTHAN LESSTHAN GREATERTHANEQUALS LESSTHANEQUALS APOSTROPHE LBRACKET RBRACKET QUESTION DOUBLE_POINT POINT PERCENTAJE AT EXCLAMATION DEF DEFN NULL BOOLEAN_TRUE BOOLEAN_FALSE AND OR NOT IF ELSE FUNCTION_PRINTLN SET UNION DIFFERENCE INTERSECTION WHILE DO FOR READ LINE FUNCTION_EMPTY TYPE_STR FUNCTION_SUB FUNCTION_SEQ FUNCTION_GET FUNCTION_COUNT FUNCTION_CONJ VECTOR LIST FUNCTION_NTHstament : LPAREN compute RPAREN\n                | vectorcompute : expression\n                | functionfunction : FUNCTION_PRINTLN STRINGfunction : READ MINUS LINEfunction : FUNCTION_EMPTY QUESTION STRINGmultiplestring : STRING\n                        | multiplestring STRINGfunction : TYPE_STR multiplestringfunction : FUNCTION_SUB STRING NUMBERfunction : FUNCTION_SEQ STRINGmultipleObjects : STRING\n                        | NUMBER\n                        | FLOAT\n                        | BOOLEAN_TRUE\n                        | BOOLEAN_FALSE\n                        | multipleObjects STRING\n                        | multipleObjects NUMBER\n                        | multipleObjects FLOAT\n                        | multipleObjects BOOLEAN_TRUE\n                        | multipleObjects BOOLEAN_FALSEvector : LBRACKET multipleObjects RBRACKETfunction : FUNCTION_GET vector NUMBERfunction : FUNCTION_COUNT vectorfunction : FUNCTION_CONJ vector multipleObjectsexpression : expression PLUS termexpression : expression MINUS termexpression : termterm : term TIMES factorterm : term DIVIDE factorterm : factorfactor : NUMBERfactor : LPAREN expression RPAREN'
+_lr_signature = 'NUMBER PLUS MINUS TIMES DIVIDE LPAREN RPAREN LCURLYBRA RCURLYBRA SETDEF ID FLOAT EQUAL NOTEQUAL STRING GREATERTHAN LESSTHAN GREATERTHANEQUALS LESSTHANEQUALS APOSTROPHE LBRACKET RBRACKET QUESTION DOUBLE_POINT POINT PERCENTAJE AT EXCLAMATION DEF DEFN NULL BOOLEAN_TRUE BOOLEAN_FALSE AND OR NOT IF ELSE FUNCTION_PRINTLN SET UNION DIFFERENCE INTERSECTION WHILE DO FOR READLINE FUNCTION_EMPTY TYPE_STR FUNCTION_SUB FUNCTION_SEQ FUNCTION_GET FUNCTION_COUNT FUNCTION_CONJ VECTOR LIST FUNCTION_NTH TAKE DROPstament : LPAREN compute RPAREN\n                | vectorcompute : expression\n                | functionfunction : FUNCTION_PRINTLN STRINGfunction : READLINEfunction : FUNCTION_EMPTY  STRINGmultiplestring : STRING\n                        | multiplestring STRINGfunction : TYPE_STR multiplestringfunction : FUNCTION_SUB STRING NUMBERfunction : FUNCTION_SEQ STRINGmultipleObjects : value\n                        | value multipleObjects\n                        | sequential_colls\n                        | sequential_colls multipleObjectsvalue : STRING\n              | NUMBER\n              | FLOAT\n              | BOOLEAN_TRUE\n              | BOOLEAN_FALSEvector : LBRACKET multipleObjects RBRACKETfunction : FUNCTION_GET sequential_colls NUMBERfunction : FUNCTION_COUNT sequential_collsfunction : FUNCTION_CONJ sequential_colls multipleObjectsassing : DEF ID stamentlist : APOSTROPHE LPAREN multipleObjects RPAREN\n        | LPAREN LIST multipleObjects RPARENsequential_colls : vector\n                        | set\n                        | list\n                        | IDset : SETDEF LCURLYBRA multipleObjects RCURLYBRA\n        | LPAREN SET multipleObjects RPARENsetFunctions_union : SET DIVIDE UNION set setsetFunctions_difference : SET DIVIDE DIFFERENCE set setsetFunctions_intersection : SET DIVIDE INTERSECTION set setfunction_take : LPAREN TAKE NUMBER sequential_collsfunction_drop : LPAREN DROP NUMBER sequential_collsexpression : expression PLUS termexpression : expression MINUS termexpression : termterm : term TIMES factorterm : term DIVIDE factorterm : factorfactor : NUMBERfactor : LPAREN expression RPAREN'
     
-_lr_action_items = {'LPAREN':([0,2,5,29,30,31,32,],[2,5,5,5,5,5,5,]),'LBRACKET':([0,17,18,19,],[4,4,4,4,]),'$end':([1,3,28,43,],[0,-2,-1,-23,]),'FUNCTION_PRINTLN':([2,],[10,]),'READ':([2,],[11,]),'FUNCTION_EMPTY':([2,],[12,]),'TYPE_STR':([2,],[13,]),'FUNCTION_SUB':([2,],[14,]),'FUNCTION_SEQ':([2,],[16,]),'FUNCTION_GET':([2,],[17,]),'FUNCTION_COUNT':([2,],[18,]),'FUNCTION_CONJ':([2,],[19,]),'NUMBER':([2,4,5,21,22,23,24,25,26,29,30,31,32,38,40,42,43,44,45,46,47,48,59,],[15,23,15,45,-13,-14,-15,-16,-17,15,15,15,15,57,58,23,-23,-18,-19,-20,-21,-22,45,]),'STRING':([4,10,13,14,16,21,22,23,24,25,26,35,36,37,42,43,44,45,46,47,48,56,59,],[22,33,37,38,39,44,-13,-14,-15,-16,-17,55,56,-8,22,-23,-18,-19,-20,-21,-22,-9,44,]),'FLOAT':([4,21,22,23,24,25,26,42,43,44,45,46,47,48,59,],[24,46,-13,-14,-15,-16,-17,24,-23,-18,-19,-20,-21,-22,46,]),'BOOLEAN_TRUE':([4,21,22,23,24,25,26,42,43,44,45,46,47,48,59,],[25,47,-13,-14,-15,-16,-17,25,-23,-18,-19,-20,-21,-22,47,]),'BOOLEAN_FALSE':([4,21,22,23,24,25,26,42,43,44,45,46,47,48,59,],[26,48,-13,-14,-15,-16,-17,26,-23,-18,-19,-20,-21,-22,48,]),'RPAREN':([6,7,8,9,15,20,22,23,24,25,26,27,33,36,37,39,41,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,],[28,-3,-4,-29,-33,-32,-13,-14,-15,-16,-17,49,-5,-10,-8,-12,-25,-23,-18,-19,-20,-21,-22,-34,-27,-28,-30,-31,-6,-7,-9,-11,-24,-26,]),'PLUS':([7,9,15,20,27,49,50,51,52,53,],[29,-29,-33,-32,29,-34,-27,-28,-30,-31,]),'MINUS':([7,9,11,15,20,27,49,50,51,52,53,],[30,-29,34,-33,-32,30,-34,-27,-28,-30,-31,]),'TIMES':([9,15,20,49,50,51,52,53,],[31,-33,-32,-34,31,31,-30,-31,]),'DIVIDE':([9,15,20,49,50,51,52,53,],[32,-33,-32,-34,32,32,-30,-31,]),'QUESTION':([12,],[35,]),'RBRACKET':([21,22,23,24,25,26,44,45,46,47,48,],[43,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,]),'LINE':([34,],[54,]),}
+_lr_action_items = {'LPAREN':([0,2,4,5,17,18,19,22,23,24,25,26,27,28,29,30,31,32,35,38,39,40,41,50,51,54,55,56,57,71,72,73,74,],[2,5,34,5,34,34,34,34,34,-17,-18,-19,-20,-21,-29,-30,-31,-32,57,5,5,5,5,34,-22,34,34,34,34,-33,-34,-28,-27,]),'LBRACKET':([0,4,17,18,19,22,23,24,25,26,27,28,29,30,31,32,50,51,54,55,56,57,71,72,73,74,],[4,4,4,4,4,4,4,-17,-18,-19,-20,-21,-29,-30,-31,-32,4,-22,4,4,4,4,-33,-34,-28,-27,]),'$end':([1,3,37,51,],[0,-2,-1,-22,]),'FUNCTION_PRINTLN':([2,],[10,]),'READLINE':([2,],[11,]),'FUNCTION_EMPTY':([2,],[12,]),'TYPE_STR':([2,],[13,]),'FUNCTION_SUB':([2,],[14,]),'FUNCTION_SEQ':([2,],[16,]),'FUNCTION_GET':([2,],[17,]),'FUNCTION_COUNT':([2,],[18,]),'FUNCTION_CONJ':([2,],[19,]),'NUMBER':([2,4,5,22,23,24,25,26,27,28,29,30,31,32,38,39,40,41,46,48,50,51,54,55,56,57,71,72,73,74,],[15,25,15,25,25,-17,-18,-19,-20,-21,-29,-30,-31,-32,15,15,15,15,64,65,25,-22,25,25,25,25,-33,-34,-28,-27,]),'STRING':([4,10,12,13,14,16,22,23,24,25,26,27,28,29,30,31,32,44,45,50,51,54,55,56,57,63,71,72,73,74,],[24,42,43,45,46,47,24,24,-17,-18,-19,-20,-21,-29,-30,-31,-32,63,-8,24,-22,24,24,24,24,-9,-33,-34,-28,-27,]),'FLOAT':([4,22,23,24,25,26,27,28,29,30,31,32,50,51,54,55,56,57,71,72,73,74,],[26,26,26,-17,-18,-19,-20,-21,-29,-30,-31,-32,26,-22,26,26,26,26,-33,-34,-28,-27,]),'BOOLEAN_TRUE':([4,22,23,24,25,26,27,28,29,30,31,32,50,51,54,55,56,57,71,72,73,74,],[27,27,27,-17,-18,-19,-20,-21,-29,-30,-31,-32,27,-22,27,27,27,27,-33,-34,-28,-27,]),'BOOLEAN_FALSE':([4,22,23,24,25,26,27,28,29,30,31,32,50,51,54,55,56,57,71,72,73,74,],[28,28,28,-17,-18,-19,-20,-21,-29,-30,-31,-32,28,-22,28,28,28,28,-33,-34,-28,-27,]),'ID':([4,17,18,19,22,23,24,25,26,27,28,29,30,31,32,50,51,54,55,56,57,71,72,73,74,],[32,32,32,32,32,32,-17,-18,-19,-20,-21,-29,-30,-31,-32,32,-22,32,32,32,32,-33,-34,-28,-27,]),'SETDEF':([4,17,18,19,22,23,24,25,26,27,28,29,30,31,32,50,51,54,55,56,57,71,72,73,74,],[33,33,33,33,33,33,-17,-18,-19,-20,-21,-29,-30,-31,-32,33,-22,33,33,33,33,-33,-34,-28,-27,]),'APOSTROPHE':([4,17,18,19,22,23,24,25,26,27,28,29,30,31,32,50,51,54,55,56,57,71,72,73,74,],[35,35,35,35,35,35,-17,-18,-19,-20,-21,-29,-30,-31,-32,35,-22,35,35,35,35,-33,-34,-28,-27,]),'RPAREN':([6,7,8,9,11,15,20,22,23,24,25,26,27,28,29,30,31,32,36,42,43,44,45,47,49,51,52,53,58,59,60,61,62,63,64,65,66,68,69,70,71,72,73,74,],[37,-3,-4,-42,-6,-46,-45,-13,-15,-17,-18,-19,-20,-21,-29,-30,-31,-32,58,-5,-7,-10,-8,-12,-24,-22,-14,-16,-47,-40,-41,-43,-44,-9,-11,-23,-25,72,73,74,-33,-34,-28,-27,]),'PLUS':([7,9,15,20,36,58,59,60,61,62,],[38,-42,-46,-45,38,-47,-40,-41,-43,-44,]),'MINUS':([7,9,15,20,36,58,59,60,61,62,],[39,-42,-46,-45,39,-47,-40,-41,-43,-44,]),'TIMES':([9,15,20,58,59,60,61,62,],[40,-46,-45,-47,40,40,-43,-44,]),'DIVIDE':([9,15,20,58,59,60,61,62,],[41,-46,-45,-47,41,41,-43,-44,]),'RBRACKET':([21,22,23,24,25,26,27,28,29,30,31,32,51,52,53,71,72,73,74,],[51,-13,-15,-17,-18,-19,-20,-21,-29,-30,-31,-32,-22,-14,-16,-33,-34,-28,-27,]),'RCURLYBRA':([22,23,24,25,26,27,28,29,30,31,32,51,52,53,67,71,72,73,74,],[-13,-15,-17,-18,-19,-20,-21,-29,-30,-31,-32,-22,-14,-16,71,-33,-34,-28,-27,]),'LCURLYBRA':([33,],[54,]),'SET':([34,],[55,]),'LIST':([34,],[56,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'stament':([0,],[1,]),'vector':([0,17,18,19,],[3,40,41,42,]),'compute':([2,],[6,]),'expression':([2,5,],[7,27,]),'function':([2,],[8,]),'term':([2,5,29,30,],[9,9,50,51,]),'factor':([2,5,29,30,31,32,],[20,20,20,20,52,53,]),'multipleObjects':([4,42,],[21,59,]),'multiplestring':([13,],[36,]),}
+_lr_goto_items = {'stament':([0,],[1,]),'vector':([0,4,17,18,19,22,23,50,54,55,56,57,],[3,29,29,29,29,29,29,29,29,29,29,29,]),'compute':([2,],[6,]),'expression':([2,5,],[7,36,]),'function':([2,],[8,]),'term':([2,5,38,39,],[9,9,59,60,]),'factor':([2,5,38,39,40,41,],[20,20,20,20,61,62,]),'multipleObjects':([4,22,23,50,54,55,56,57,],[21,52,53,66,67,68,69,70,]),'value':([4,22,23,50,54,55,56,57,],[22,22,22,22,22,22,22,22,]),'sequential_colls':([4,17,18,19,22,23,50,54,55,56,57,],[23,48,49,50,23,23,23,23,23,23,23,]),'set':([4,17,18,19,22,23,50,54,55,56,57,],[30,30,30,30,30,30,30,30,30,30,30,]),'list':([4,17,18,19,22,23,50,54,55,56,57,],[31,31,31,31,31,31,31,31,31,31,31,]),'multiplestring':([13,],[44,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -31,33 +31,46 @@ _lr_productions = [
   ('compute -> expression','compute',1,'p_compute','sintactico_clojure.py',12),
   ('compute -> function','compute',1,'p_compute','sintactico_clojure.py',13),
   ('function -> FUNCTION_PRINTLN STRING','function',2,'p_function_println','sintactico_clojure.py',18),
-  ('function -> READ MINUS LINE','function',3,'p_function_readLine','sintactico_clojure.py',22),
-  ('function -> FUNCTION_EMPTY QUESTION STRING','function',3,'p_function_empty','sintactico_clojure.py',25),
+  ('function -> READLINE','function',1,'p_function_readLine','sintactico_clojure.py',22),
+  ('function -> FUNCTION_EMPTY STRING','function',2,'p_function_empty','sintactico_clojure.py',25),
   ('multiplestring -> STRING','multiplestring',1,'p_multiplestring','sintactico_clojure.py',28),
   ('multiplestring -> multiplestring STRING','multiplestring',2,'p_multiplestring','sintactico_clojure.py',29),
   ('function -> TYPE_STR multiplestring','function',2,'p_function_concant','sintactico_clojure.py',32),
   ('function -> FUNCTION_SUB STRING NUMBER','function',3,'p_function_subString','sintactico_clojure.py',35),
   ('function -> FUNCTION_SEQ STRING','function',2,'p_function_sequence','sintactico_clojure.py',38),
-  ('multipleObjects -> STRING','multipleObjects',1,'p_multipleObjects','sintactico_clojure.py',42),
-  ('multipleObjects -> NUMBER','multipleObjects',1,'p_multipleObjects','sintactico_clojure.py',43),
-  ('multipleObjects -> FLOAT','multipleObjects',1,'p_multipleObjects','sintactico_clojure.py',44),
-  ('multipleObjects -> BOOLEAN_TRUE','multipleObjects',1,'p_multipleObjects','sintactico_clojure.py',45),
-  ('multipleObjects -> BOOLEAN_FALSE','multipleObjects',1,'p_multipleObjects','sintactico_clojure.py',46),
-  ('multipleObjects -> multipleObjects STRING','multipleObjects',2,'p_multipleObjects','sintactico_clojure.py',47),
-  ('multipleObjects -> multipleObjects NUMBER','multipleObjects',2,'p_multipleObjects','sintactico_clojure.py',48),
-  ('multipleObjects -> multipleObjects FLOAT','multipleObjects',2,'p_multipleObjects','sintactico_clojure.py',49),
-  ('multipleObjects -> multipleObjects BOOLEAN_TRUE','multipleObjects',2,'p_multipleObjects','sintactico_clojure.py',50),
-  ('multipleObjects -> multipleObjects BOOLEAN_FALSE','multipleObjects',2,'p_multipleObjects','sintactico_clojure.py',51),
-  ('vector -> LBRACKET multipleObjects RBRACKET','vector',3,'p_vector','sintactico_clojure.py',54),
-  ('function -> FUNCTION_GET vector NUMBER','function',3,'p_function_get','sintactico_clojure.py',58),
-  ('function -> FUNCTION_COUNT vector','function',2,'p_function_count','sintactico_clojure.py',61),
-  ('function -> FUNCTION_CONJ vector multipleObjects','function',3,'p_function_conj','sintactico_clojure.py',64),
-  ('expression -> expression PLUS term','expression',3,'p_expression_plus','sintactico_clojure.py',68),
-  ('expression -> expression MINUS term','expression',3,'p_expression_minus','sintactico_clojure.py',72),
-  ('expression -> term','expression',1,'p_expression_term','sintactico_clojure.py',76),
-  ('term -> term TIMES factor','term',3,'p_term_times','sintactico_clojure.py',80),
-  ('term -> term DIVIDE factor','term',3,'p_term_div','sintactico_clojure.py',84),
-  ('term -> factor','term',1,'p_term_factor','sintactico_clojure.py',88),
-  ('factor -> NUMBER','factor',1,'p_factor_num','sintactico_clojure.py',92),
-  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','sintactico_clojure.py',96),
+  ('multipleObjects -> value','multipleObjects',1,'p_multipleObjects','sintactico_clojure.py',42),
+  ('multipleObjects -> value multipleObjects','multipleObjects',2,'p_multipleObjects','sintactico_clojure.py',43),
+  ('multipleObjects -> sequential_colls','multipleObjects',1,'p_multipleObjects','sintactico_clojure.py',44),
+  ('multipleObjects -> sequential_colls multipleObjects','multipleObjects',2,'p_multipleObjects','sintactico_clojure.py',45),
+  ('value -> STRING','value',1,'p_value','sintactico_clojure.py',48),
+  ('value -> NUMBER','value',1,'p_value','sintactico_clojure.py',49),
+  ('value -> FLOAT','value',1,'p_value','sintactico_clojure.py',50),
+  ('value -> BOOLEAN_TRUE','value',1,'p_value','sintactico_clojure.py',51),
+  ('value -> BOOLEAN_FALSE','value',1,'p_value','sintactico_clojure.py',52),
+  ('vector -> LBRACKET multipleObjects RBRACKET','vector',3,'p_vector','sintactico_clojure.py',55),
+  ('function -> FUNCTION_GET sequential_colls NUMBER','function',3,'p_function_get','sintactico_clojure.py',59),
+  ('function -> FUNCTION_COUNT sequential_colls','function',2,'p_function_count','sintactico_clojure.py',62),
+  ('function -> FUNCTION_CONJ sequential_colls multipleObjects','function',3,'p_function_conj','sintactico_clojure.py',65),
+  ('assing -> DEF ID stament','assing',3,'p_assing','sintactico_clojure.py',68),
+  ('list -> APOSTROPHE LPAREN multipleObjects RPAREN','list',4,'p_list','sintactico_clojure.py',76),
+  ('list -> LPAREN LIST multipleObjects RPAREN','list',4,'p_list','sintactico_clojure.py',77),
+  ('sequential_colls -> vector','sequential_colls',1,'p_sequential_colls','sintactico_clojure.py',80),
+  ('sequential_colls -> set','sequential_colls',1,'p_sequential_colls','sintactico_clojure.py',81),
+  ('sequential_colls -> list','sequential_colls',1,'p_sequential_colls','sintactico_clojure.py',82),
+  ('sequential_colls -> ID','sequential_colls',1,'p_sequential_colls','sintactico_clojure.py',83),
+  ('set -> SETDEF LCURLYBRA multipleObjects RCURLYBRA','set',4,'p_set','sintactico_clojure.py',86),
+  ('set -> LPAREN SET multipleObjects RPAREN','set',4,'p_set','sintactico_clojure.py',87),
+  ('setFunctions_union -> SET DIVIDE UNION set set','setFunctions_union',5,'p_setFunctions_union','sintactico_clojure.py',90),
+  ('setFunctions_difference -> SET DIVIDE DIFFERENCE set set','setFunctions_difference',5,'p_setFunctions_difference','sintactico_clojure.py',93),
+  ('setFunctions_intersection -> SET DIVIDE INTERSECTION set set','setFunctions_intersection',5,'p_setFunctions_intersection','sintactico_clojure.py',96),
+  ('function_take -> LPAREN TAKE NUMBER sequential_colls','function_take',4,'p_function_take','sintactico_clojure.py',99),
+  ('function_drop -> LPAREN DROP NUMBER sequential_colls','function_drop',4,'p_function_drop','sintactico_clojure.py',102),
+  ('expression -> expression PLUS term','expression',3,'p_expression_plus','sintactico_clojure.py',107),
+  ('expression -> expression MINUS term','expression',3,'p_expression_minus','sintactico_clojure.py',111),
+  ('expression -> term','expression',1,'p_expression_term','sintactico_clojure.py',115),
+  ('term -> term TIMES factor','term',3,'p_term_times','sintactico_clojure.py',119),
+  ('term -> term DIVIDE factor','term',3,'p_term_div','sintactico_clojure.py',123),
+  ('term -> factor','term',1,'p_term_factor','sintactico_clojure.py',127),
+  ('factor -> NUMBER','factor',1,'p_factor_num','sintactico_clojure.py',131),
+  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','sintactico_clojure.py',135),
 ]

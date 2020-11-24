@@ -19,10 +19,10 @@ def p_function_println(p):
      p[0] = 'nil'
 
 def p_function_readLine(p):
-     'function : READ MINUS LINE'
+     'function : READLINE'
 
 def p_function_empty(p):
-     'function : FUNCTION_EMPTY QUESTION STRING'
+     'function : FUNCTION_EMPTY  STRING'
 
 def p_multiplestring(p):
      '''multiplestring : STRING
@@ -39,16 +39,17 @@ def p_function_sequence(p):
 
      
 def p_multipleObjects(p):
-     '''multipleObjects : STRING
-                        | NUMBER
-                        | FLOAT
-                        | BOOLEAN_TRUE
-                        | BOOLEAN_FALSE
-                        | multipleObjects STRING
-                        | multipleObjects NUMBER
-                        | multipleObjects FLOAT
-                        | multipleObjects BOOLEAN_TRUE
-                        | multipleObjects BOOLEAN_FALSE'''
+     '''multipleObjects : value
+                        | value multipleObjects
+                        | sequential_colls
+                        | sequential_colls multipleObjects'''
+     
+def p_value(p):
+     '''value : STRING
+              | NUMBER
+              | FLOAT
+              | BOOLEAN_TRUE
+              | BOOLEAN_FALSE'''
 
 def p_vector(p):
      'vector : LBRACKET multipleObjects RBRACKET'
@@ -63,6 +64,7 @@ def p_function_count(p):
 def p_function_conj(p):
      'function : FUNCTION_CONJ sequential_colls multipleObjects'
 
+
 #Modifiqué estas cosas Marck. :3
 
 ### Fin funciones escritas por Marck Murillo
@@ -73,7 +75,10 @@ def p_list(p):
         | LPAREN LIST multipleObjects RPAREN'''
 
 def p_sequential_colls(p):
-    'sequential_colls : vector | set | list | ID'
+    '''sequential_colls : vector
+                        | set
+                        | list
+                        | ID'''
 
 def p_set(p):
     '''set : SETDEF LCURLYBRA multipleObjects RCURLYBRA
