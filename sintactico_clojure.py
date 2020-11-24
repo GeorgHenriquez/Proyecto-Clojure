@@ -55,15 +55,47 @@ def p_vector(p):
 
 
 def p_function_get(p):
-     'function : FUNCTION_GET vector NUMBER'
+     'function : FUNCTION_GET sequential_colls NUMBER'
 
 def p_function_count(p):
-     'function : FUNCTION_COUNT vector'
+     'function : FUNCTION_COUNT sequential_colls'
 
 def p_function_conj(p):
-     'function : FUNCTION_CONJ vector multipleObjects'
-     
-### Fin funciones escritas por Marck Murillo     
+     'function : FUNCTION_CONJ sequential_colls multipleObjects'
+
+#Modifiqué estas cosas Marck. :3
+
+### Fin funciones escritas por Marck Murillo
+
+### Inicio funciones escritas por Franklin Ordóñez
+def p_list(p):
+    '''list : APOSTROPHE LPAREN multipleObjects RPAREN
+        | LPAREN LIST multipleObjects RPAREN'''
+
+def p_sequential_colls(p):
+    'sequential_colls : vector | set | list | ID'
+
+def p_set(p):
+    '''set : SETDEF LCURLYBRA multipleObjects RCURLYBRA
+        | LPAREN SET multipleObjects RPAREN'''
+
+def p_setFunctions_union(p):
+    'setFunctions_union : SET DIVIDE UNION set set'
+
+def p_setFunctions_difference(p):
+    'setFunctions_difference : SET DIVIDE DIFFERENCE set set'
+
+def p_setFunctions_intersection(p):
+    'setFunctions_intersection : SET DIVIDE INTERSECTION set set'
+
+def p_function_take(p):
+    'function_take : LPAREN TAKE NUMBER sequential_colls'
+
+def p_function_drop(p):
+    'function_drop : LPAREN DROP NUMBER sequential_colls'
+
+
+### Fin funciones escritas por Franklin Ordóñez
 def p_expression_plus(p):
      'expression : expression PLUS term'
      p[0] = p[1] + p[3]
