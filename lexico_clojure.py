@@ -98,10 +98,10 @@ t_ignore  = ' \t'
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
+    return f"Illegal character {t.value[0]}"
 
 # Build the lexer
 lexer = lex.lex()
-
 
 """
 linea = input("-> ")
@@ -114,23 +114,26 @@ while linea!= "":
             break      # No more input
         print(tok)
     linea = input("-> ")
-
+"""
 
 #Funcion para oder analizar un solo string 
 def analizar(data):
     lexer.input(data)
+    resultado = []
     while True:
         tok = lexer.token()
         if not tok:
             break      # No more input
-        print(tok)
         
-archivo = open("codigo.txt")
-for linea in archivo:
-    if linea[0]!='#':
-        print(">> "+linea)
-        analizar(linea)
-        if len(linea)==0:
-            break
+        resultado.append(tok)
+    return resultado
+        
+# archivo = open("codigo.txt")
+# for linea in archivo:
+#     if linea[0]!='#':
+#         print(">> "+linea)
+#         analizar(linea)
+#         if len(linea)==0:
+#             break
 
-"""
+
