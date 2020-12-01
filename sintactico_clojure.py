@@ -8,8 +8,16 @@ def p_stament(p):
 
 def p_compute(p):
      '''compute : function
-                | general_expression'''
+                | general_expression
+                | control_structure code_block
+                | while'''
      p[0] = p[1]
+
+def p_code_block(p):
+     '''code_block : LPAREN function RPAREN
+                   | LPAREN general_expression RPAREN
+                   | LPAREN function RPAREN code_block 
+                   | LPAREN general_expression RPAREN code_block '''
 
 ### Funciones escritas por Marck Murillo
 def p_function_println(p):
@@ -115,11 +123,11 @@ def p_setFunctions_intersection(p):
     p[0] = 'SET INTERSECTION'
 
 def p_function_take(p):
-    'function_take : LPAREN TAKE NUMBER sequential_colls'
+    'function_take : TAKE NUMBER sequential_colls'
     p[0] = 'FUNCTION TAKE'
 
 def p_function_drop(p):
-    'function_drop : LPAREN DROP NUMBER sequential_colls'
+    'function_drop : DROP NUMBER sequential_colls'
     p[0] = 'FUNCTION DROP'
 
 
@@ -129,8 +137,7 @@ def p_function_drop(p):
 ###Operaciones aritmeticas - George Henriquez
 def p_general_expression(p):
     '''general_expression : math_operation
-                          | bool_operation
-                          | compare_operation
+                          | boolean_operation
                           | variable_expression
                           | setFunctions_union
                           | setFunctions_intersection
@@ -144,71 +151,78 @@ def p_num_expression(p):
     p[0] = p[2]
 
 def p_operation_plus(p):
-    '''math_operation : PLUS num_expression NUMBER'''
-    p[0] = p[2] + p[3]
+    '''math_operation : PLUS num_expression num_expression'''
+    p[0] = 'Addition'
 
 def p_operation_minus(p):
-    '''math_operation : MINUS num_expression NUMBER'''
-    p[0] = p[2] - p[3]
+    '''math_operation : MINUS num_expression num_expression'''
+    p[0] = 'Subtraction'
 
 def p_operation_divide(p):
-    '''math_operation : DIVIDE num_expression NUMBER'''
-    p[0] = p[2] / p[3]
+    '''math_operation : DIVIDE num_expression num_expression'''
+    p[0] = 'Division'
 
 def p_operation_times(p):
-    '''math_operation : TIMES num_expression NUMBER'''
-    p[0] = p[2] * p[3]
+    '''math_operation : TIMES num_expression num_expression'''
+    p[0] = 'Multiplication'
 
 def p_number(p): 
-    '''num_expression : NUMBER'''
+    '''num_expression : NUMBER
+                      | ID'''
     p[0] = p[1]
 
 ###Operaciones Booleanas - George Henriquez
+def p_boolean_operation(p):
+     '''boolean_operation : bool_operation
+                          | compare_operation'''
+     p[0] = p[1]
+
 def p_boolean_expression(p):
      'bool_expression : LPAREN bool_operation RPAREN'
      p[0] = p[2]
 
 def p_bool_operation_and(p):
      '''bool_operation : AND bool_expression bool_expression'''
-     p[0] = p[2] and p[3]
+     p[0] = 'AND Operation'
 
 def p_bool_operation_or(p):
      '''bool_operation : OR bool_expression bool_expression'''
-     p[0] = p[2] or p[3]
+     p[0] = 'OR Operation'
 
 def p_bool_operation_not(p):
      '''bool_operation : NOT bool_expression'''
-     p[0] = not p[2]
+     p[0] = 'NOT Operation'
 
 def p_bool_type(p):
      '''bool_expression : BOOLEAN_TRUE
-     | BOOLEAN_FALSE'''
+     | BOOLEAN_FALSE
+     | ID'''
      p[0] = p[1]
 
 ###Operaciones de Comparacion - George Henriquez
 def p_compare_operation_greaterthan(p):
      'compare_operation : GREATERTHAN num_expression num_expression'
-     p[0] = p[2] > p[3]
+     p[0] = 'GREATERTHAN Operation'
 
 def p_compare_operation_lessthan(p):
      'compare_operation : LESSTHAN num_expression num_expression'
-     p[0] = p[2] < p[3]
+     p[0] = 'LESSTHAN Operation'
 
 def p_compare_operation_greaterthan_equals(p):
      'compare_operation : GREATERTHANEQUALS num_expression num_expression'
-     p[0] = p[2] >= p[3]
+     p[0] = 'GREATER THAN EQUALS Operation'
 
 def p_compare_operation_lessthan_equals(p):
      'compare_operation : LESSTHANEQUALS num_expression num_expression'
-     p[0] = p[2] <= p[3]
+     p[0] = 'LESS THAN EQUALS Operation'
 
 def p_compare_operation_equal(p):
      'compare_operation : EQUAL num_expression num_expression'
-     p[0] = p[2] == p[3]
+     p[0] = 'EQUAL Operation'
 
 def p_compare_operation_notequal(p):
      'compare_operation : NOTEQUAL num_expression num_expression'
-     p[0] = p[2] != p[3]
+     p[0] = 'NOT EQUAL Operation'
 
 #Definicion de variables
 def p_variable_expression_statemt(p):
@@ -217,16 +231,35 @@ def p_variable_expression_statemt(p):
                             | DEF ID stament''' 
      p[0] = f'{p[2]} = {p[3]}' 
 
+
 #Estructuras de control
+def p_control_structure(p):
+     '''control_structure : if
+                          | for'''
+     p[0] = p[1]
+
 def p_for(p):
-    '''for : LPAREN FOR LBRACKET ID sequential_colls RBRACKET general_expression RPAREN
-    | FOR LBRACKET ID ID RBRACKET general_expression RPAREN'''
+    '''for : FOR LBRACKET ID sequential_colls RBRACKET
+           | FOR LBRACKET ID ID RBRACKET'''
+    p[0] = 'for'
 
 def p_while(p):
-    '''while : LPAREN WHILE LPAREN compare_operation RPAREN LPAREN DO general_expression general_expression RPAREN RPAREN'''
+     '''while : WHILE LPAREN boolean_operation RPAREN do'''
+     p[0] = 'while'
+
+def p_do_statement(p):
+     'do : LPAREN DO code_block RPAREN'
+     p[0] = 'do'
 
 def p_if(p):
-    '''if : LPAREN IF LPAREN compare_operation RPAREN LPAREN general_expression general_expression RPAREN'''
+    '''if : IF LPAREN boolean_operation RPAREN '''
+    p[0] = 'if'
+
+
+
+# Error rule for syntax errors
+def p_error(p):
+    print("Syntax error in input!")
 
 
 #funciones de error
@@ -252,6 +285,7 @@ def p_error(token):
 
 # Build the parser
 parser = yacc.yacc()
+
 
 # #Funcion para probar -Henriquez
 # def prueba():
@@ -354,4 +388,4 @@ while True:
    print(result)
 
 """
-   
+
