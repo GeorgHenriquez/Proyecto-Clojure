@@ -62,8 +62,8 @@ Rule 43    set -> LPAREN SET multipleObjects RPAREN
 Rule 44    setFunctions_union -> SET DIVIDE UNION set set
 Rule 45    setFunctions_difference -> SET DIVIDE DIFFERENCE set set
 Rule 46    setFunctions_intersection -> SET DIVIDE INTERSECTION set set
-Rule 47    function_take -> LPAREN TAKE NUMBER sequential_colls
-Rule 48    function_drop -> LPAREN DROP NUMBER sequential_colls
+Rule 47    function_take -> TAKE NUMBER sequential_colls
+Rule 48    function_drop -> DROP NUMBER sequential_colls
 Rule 49    general_expression -> math_operation
 Rule 50    general_expression -> boolean_operation
 Rule 51    general_expression -> variable_expression
@@ -73,53 +73,56 @@ Rule 54    general_expression -> setFunctions_difference
 Rule 55    general_expression -> function_take
 Rule 56    general_expression -> function_drop
 Rule 57    num_expression -> LPAREN math_operation RPAREN
-Rule 58    math_operation -> PLUS num_expression NUMBER
-Rule 59    math_operation -> MINUS num_expression NUMBER
-Rule 60    math_operation -> DIVIDE num_expression NUMBER
-Rule 61    math_operation -> TIMES num_expression NUMBER
+Rule 58    math_operation -> PLUS num_expression num_expression
+Rule 59    math_operation -> MINUS num_expression num_expression
+Rule 60    math_operation -> DIVIDE num_expression num_expression
+Rule 61    math_operation -> TIMES num_expression num_expression
 Rule 62    num_expression -> NUMBER
-Rule 63    boolean_operation -> bool_operation
-Rule 64    boolean_operation -> compare_operation
-Rule 65    bool_expression -> LPAREN bool_operation RPAREN
-Rule 66    bool_operation -> AND bool_expression bool_expression
-Rule 67    bool_operation -> OR bool_expression bool_expression
-Rule 68    bool_operation -> NOT bool_expression
-Rule 69    bool_expression -> BOOLEAN_TRUE
-Rule 70    bool_expression -> BOOLEAN_FALSE
-Rule 71    compare_operation -> GREATERTHAN num_expression num_expression
-Rule 72    compare_operation -> LESSTHAN num_expression num_expression
-Rule 73    compare_operation -> GREATERTHANEQUALS num_expression num_expression
-Rule 74    compare_operation -> LESSTHANEQUALS num_expression num_expression
-Rule 75    compare_operation -> EQUAL num_expression num_expression
-Rule 76    compare_operation -> NOTEQUAL num_expression num_expression
-Rule 77    variable_expression -> DEF ID multipleObjects
-Rule 78    control_structure -> if
-Rule 79    control_structure -> for
-Rule 80    for -> FOR LBRACKET ID sequential_colls RBRACKET
-Rule 81    for -> FOR LBRACKET ID ID RBRACKET
-Rule 82    while -> WHILE LPAREN boolean_operation RPAREN do
-Rule 83    do -> LPAREN DO code_block RPAREN
-Rule 84    if -> IF LPAREN boolean_operation RPAREN
+Rule 63    num_expression -> ID
+Rule 64    boolean_operation -> bool_operation
+Rule 65    boolean_operation -> compare_operation
+Rule 66    bool_expression -> LPAREN bool_operation RPAREN
+Rule 67    bool_operation -> AND bool_expression bool_expression
+Rule 68    bool_operation -> OR bool_expression bool_expression
+Rule 69    bool_operation -> NOT bool_expression
+Rule 70    bool_expression -> BOOLEAN_TRUE
+Rule 71    bool_expression -> BOOLEAN_FALSE
+Rule 72    bool_expression -> ID
+Rule 73    compare_operation -> GREATERTHAN num_expression num_expression
+Rule 74    compare_operation -> LESSTHAN num_expression num_expression
+Rule 75    compare_operation -> GREATERTHANEQUALS num_expression num_expression
+Rule 76    compare_operation -> LESSTHANEQUALS num_expression num_expression
+Rule 77    compare_operation -> EQUAL num_expression num_expression
+Rule 78    compare_operation -> NOTEQUAL num_expression num_expression
+Rule 79    variable_expression -> DEF ID multipleObjects
+Rule 80    variable_expression -> DEF ID LPAREN general_expression RPAREN
+Rule 81    control_structure -> if
+Rule 82    control_structure -> for
+Rule 83    for -> FOR LBRACKET ID sequential_colls RBRACKET
+Rule 84    for -> FOR LBRACKET ID ID RBRACKET
+Rule 85    while -> WHILE LPAREN boolean_operation RPAREN do
+Rule 86    do -> LPAREN DO code_block RPAREN
+Rule 87    if -> IF LPAREN boolean_operation RPAREN
 
 Terminals, with rules where they appear
 
-AND                  : 66
+AND                  : 67
 APOSTROPHE           : 36
 AT                   : 
-BOOLEAN_FALSE        : 30 70
-BOOLEAN_TRUE         : 29 69
-DEF                  : 77
+BOOLEAN_FALSE        : 30 71
+BOOLEAN_TRUE         : 29 70
+DEF                  : 79 80
 DEFN                 : 
 DIFFERENCE           : 45
 DIVIDE               : 44 45 46 60
-DO                   : 83
+DO                   : 86
 DOUBLE_POINT         : 
 DROP                 : 48
 ELSE                 : 
-EQUAL                : 75
+EQUAL                : 77
 EXCLAMATION          : 
 FLOAT                : 28
-FOR                  : 80 81
+FOR                  : 83 84
 FUNCTION_CONJ        : 35
 FUNCTION_COUNT       : 34
 FUNCTION_EMPTY       : 12
@@ -128,31 +131,31 @@ FUNCTION_NTH         :
 FUNCTION_PRINTLN     : 10
 FUNCTION_SEQ         : 20 21
 FUNCTION_SUB         : 18 19
-GREATERTHAN          : 71
-GREATERTHANEQUALS    : 73
-ID                   : 19 21 41 77 80 81 81
-IF                   : 84
+GREATERTHAN          : 73
+GREATERTHANEQUALS    : 75
+ID                   : 19 21 41 63 72 79 80 83 84 84
+IF                   : 87
 INTERSECTION         : 46
-LBRACKET             : 31 80 81
+LBRACKET             : 31 83 84
 LCURLYBRA            : 42
-LESSTHAN             : 72
-LESSTHANEQUALS       : 74
+LESSTHAN             : 74
+LESSTHANEQUALS       : 76
 LIST                 : 37
-LPAREN               : 1 6 7 8 9 32 36 37 43 47 48 57 65 82 83 84
+LPAREN               : 1 6 7 8 9 32 36 37 43 57 66 80 85 86 87
 MINUS                : 59
-NOT                  : 68
-NOTEQUAL             : 76
+NOT                  : 69
+NOTEQUAL             : 78
 NULL                 : 
-NUMBER               : 18 19 27 33 47 48 58 59 60 61 62
-OR                   : 67
+NUMBER               : 18 19 27 33 47 48 62
+OR                   : 68
 PERCENTAJE           : 
 PLUS                 : 58
 POINT                : 
 QUESTION             : 
-RBRACKET             : 31 80 81
+RBRACKET             : 31 83 84
 RCURLYBRA            : 42
 READLINE             : 11
-RPAREN               : 1 6 7 8 9 32 36 37 43 57 65 82 83 84
+RPAREN               : 1 6 7 8 9 32 36 37 43 57 66 80 85 86 87
 SET                  : 43 44 45 46
 SETDEF               : 42
 STRING               : 12 13 14 18 20 26
@@ -161,31 +164,31 @@ TIMES                : 61
 TYPE_STR             : 17
 UNION                : 44
 VECTOR               : 32
-WHILE                : 82
+WHILE                : 85
 error                : 
 
 Nonterminals, with rules where they appear
 
-bool_expression      : 66 66 67 67 68
-bool_operation       : 63 65
-boolean_operation    : 50 82 84
-code_block           : 4 8 9 83
-compare_operation    : 64
+bool_expression      : 67 67 68 68 69
+bool_operation       : 64 66
+boolean_operation    : 50 85 87
+code_block           : 4 8 9 86
+compare_operation    : 65
 compute              : 1
 control_structure    : 4
-do                   : 82
-for                  : 79
+do                   : 85
+for                  : 82
 function             : 2 6 8
 function_drop        : 56
 function_take        : 55
-general_expression   : 3 7 9
-if                   : 78
+general_expression   : 3 7 9 80
+if                   : 81
 list                 : 40
 math_operation       : 49 57
-multipleObjects      : 10 23 25 31 32 35 36 37 42 43 77
+multipleObjects      : 10 23 25 31 32 35 36 37 42 43 79
 multiplestring       : 14 16 17
-num_expression       : 58 59 60 61 71 71 72 72 73 73 74 74 75 75 76 76
-sequential_colls     : 24 25 33 34 35 47 48 80
+num_expression       : 58 58 59 59 60 60 61 61 73 73 74 74 75 75 76 76 77 77 78 78
+sequential_colls     : 24 25 33 34 35 47 48 83
 set                  : 39 44 44 45 45 46 46
 setFunctions_difference : 54
 setFunctions_intersection : 53
@@ -239,112 +242,105 @@ state 2
     (54) general_expression -> . setFunctions_difference
     (55) general_expression -> . function_take
     (56) general_expression -> . function_drop
-    (78) control_structure -> . if
-    (79) control_structure -> . for
-    (82) while -> . WHILE LPAREN boolean_operation RPAREN do
-    (58) math_operation -> . PLUS num_expression NUMBER
-    (59) math_operation -> . MINUS num_expression NUMBER
-    (60) math_operation -> . DIVIDE num_expression NUMBER
-    (61) math_operation -> . TIMES num_expression NUMBER
-    (63) boolean_operation -> . bool_operation
-    (64) boolean_operation -> . compare_operation
-    (77) variable_expression -> . DEF ID multipleObjects
+    (81) control_structure -> . if
+    (82) control_structure -> . for
+    (85) while -> . WHILE LPAREN boolean_operation RPAREN do
+    (58) math_operation -> . PLUS num_expression num_expression
+    (59) math_operation -> . MINUS num_expression num_expression
+    (60) math_operation -> . DIVIDE num_expression num_expression
+    (61) math_operation -> . TIMES num_expression num_expression
+    (64) boolean_operation -> . bool_operation
+    (65) boolean_operation -> . compare_operation
+    (79) variable_expression -> . DEF ID multipleObjects
+    (80) variable_expression -> . DEF ID LPAREN general_expression RPAREN
     (44) setFunctions_union -> . SET DIVIDE UNION set set
     (46) setFunctions_intersection -> . SET DIVIDE INTERSECTION set set
     (45) setFunctions_difference -> . SET DIVIDE DIFFERENCE set set
-    (47) function_take -> . LPAREN TAKE NUMBER sequential_colls
-    (48) function_drop -> . LPAREN DROP NUMBER sequential_colls
-    (84) if -> . IF LPAREN boolean_operation RPAREN
-    (80) for -> . FOR LBRACKET ID sequential_colls RBRACKET
-    (81) for -> . FOR LBRACKET ID ID RBRACKET
-    (66) bool_operation -> . AND bool_expression bool_expression
-    (67) bool_operation -> . OR bool_expression bool_expression
-    (68) bool_operation -> . NOT bool_expression
-    (71) compare_operation -> . GREATERTHAN num_expression num_expression
-    (72) compare_operation -> . LESSTHAN num_expression num_expression
-    (73) compare_operation -> . GREATERTHANEQUALS num_expression num_expression
-    (74) compare_operation -> . LESSTHANEQUALS num_expression num_expression
-    (75) compare_operation -> . EQUAL num_expression num_expression
-    (76) compare_operation -> . NOTEQUAL num_expression num_expression
+    (47) function_take -> . TAKE NUMBER sequential_colls
+    (48) function_drop -> . DROP NUMBER sequential_colls
+    (87) if -> . IF LPAREN boolean_operation RPAREN
+    (83) for -> . FOR LBRACKET ID sequential_colls RBRACKET
+    (84) for -> . FOR LBRACKET ID ID RBRACKET
+    (67) bool_operation -> . AND bool_expression bool_expression
+    (68) bool_operation -> . OR bool_expression bool_expression
+    (69) bool_operation -> . NOT bool_expression
+    (73) compare_operation -> . GREATERTHAN num_expression num_expression
+    (74) compare_operation -> . LESSTHAN num_expression num_expression
+    (75) compare_operation -> . GREATERTHANEQUALS num_expression num_expression
+    (76) compare_operation -> . LESSTHANEQUALS num_expression num_expression
+    (77) compare_operation -> . EQUAL num_expression num_expression
+    (78) compare_operation -> . NOTEQUAL num_expression num_expression
 
-    FUNCTION_PRINTLN shift and go to state 9
-    READLINE        shift and go to state 10
-    FUNCTION_EMPTY  shift and go to state 11
-    TYPE_STR        shift and go to state 12
-    FUNCTION_SUB    shift and go to state 13
-    FUNCTION_SEQ    shift and go to state 14
-    FUNCTION_GET    shift and go to state 15
-    FUNCTION_COUNT  shift and go to state 16
-    FUNCTION_CONJ   shift and go to state 17
-    WHILE           shift and go to state 28
-    PLUS            shift and go to state 29
-    MINUS           shift and go to state 30
-    DIVIDE          shift and go to state 31
-    TIMES           shift and go to state 32
-    DEF             shift and go to state 35
-    SET             shift and go to state 36
-    LPAREN          shift and go to state 3
-    IF              shift and go to state 37
-    FOR             shift and go to state 38
-    AND             shift and go to state 39
-    OR              shift and go to state 40
-    NOT             shift and go to state 41
-    GREATERTHAN     shift and go to state 42
-    LESSTHAN        shift and go to state 43
-    GREATERTHANEQUALS shift and go to state 44
-    LESSTHANEQUALS  shift and go to state 45
-    EQUAL           shift and go to state 46
-    NOTEQUAL        shift and go to state 47
+    FUNCTION_PRINTLN shift and go to state 8
+    READLINE        shift and go to state 9
+    FUNCTION_EMPTY  shift and go to state 10
+    TYPE_STR        shift and go to state 11
+    FUNCTION_SUB    shift and go to state 12
+    FUNCTION_SEQ    shift and go to state 13
+    FUNCTION_GET    shift and go to state 14
+    FUNCTION_COUNT  shift and go to state 15
+    FUNCTION_CONJ   shift and go to state 16
+    WHILE           shift and go to state 27
+    PLUS            shift and go to state 28
+    MINUS           shift and go to state 29
+    DIVIDE          shift and go to state 30
+    TIMES           shift and go to state 31
+    DEF             shift and go to state 34
+    SET             shift and go to state 35
+    TAKE            shift and go to state 36
+    DROP            shift and go to state 37
+    IF              shift and go to state 38
+    FOR             shift and go to state 39
+    AND             shift and go to state 40
+    OR              shift and go to state 41
+    NOT             shift and go to state 42
+    GREATERTHAN     shift and go to state 43
+    LESSTHAN        shift and go to state 44
+    GREATERTHANEQUALS shift and go to state 45
+    LESSTHANEQUALS  shift and go to state 46
+    EQUAL           shift and go to state 47
+    NOTEQUAL        shift and go to state 48
 
-    compute                        shift and go to state 4
-    function                       shift and go to state 5
-    general_expression             shift and go to state 6
-    control_structure              shift and go to state 7
-    while                          shift and go to state 8
-    math_operation                 shift and go to state 18
-    boolean_operation              shift and go to state 19
-    variable_expression            shift and go to state 20
-    setFunctions_union             shift and go to state 21
-    setFunctions_intersection      shift and go to state 22
-    setFunctions_difference        shift and go to state 23
-    function_take                  shift and go to state 24
-    function_drop                  shift and go to state 25
-    if                             shift and go to state 26
-    for                            shift and go to state 27
-    bool_operation                 shift and go to state 33
-    compare_operation              shift and go to state 34
+    compute                        shift and go to state 3
+    function                       shift and go to state 4
+    general_expression             shift and go to state 5
+    control_structure              shift and go to state 6
+    while                          shift and go to state 7
+    math_operation                 shift and go to state 17
+    boolean_operation              shift and go to state 18
+    variable_expression            shift and go to state 19
+    setFunctions_union             shift and go to state 20
+    setFunctions_intersection      shift and go to state 21
+    setFunctions_difference        shift and go to state 22
+    function_take                  shift and go to state 23
+    function_drop                  shift and go to state 24
+    if                             shift and go to state 25
+    for                            shift and go to state 26
+    bool_operation                 shift and go to state 32
+    compare_operation              shift and go to state 33
 
 state 3
 
-    (47) function_take -> LPAREN . TAKE NUMBER sequential_colls
-    (48) function_drop -> LPAREN . DROP NUMBER sequential_colls
+    (1) stament -> LPAREN compute . RPAREN
 
-    TAKE            shift and go to state 48
-    DROP            shift and go to state 49
+    RPAREN          shift and go to state 49
 
 
 state 4
-
-    (1) stament -> LPAREN compute . RPAREN
-
-    RPAREN          shift and go to state 50
-
-
-state 5
 
     (2) compute -> function .
 
     RPAREN          reduce using rule 2 (compute -> function .)
 
 
-state 6
+state 5
 
     (3) compute -> general_expression .
 
     RPAREN          reduce using rule 3 (compute -> general_expression .)
 
 
-state 7
+state 6
 
     (4) compute -> control_structure . code_block
     (6) code_block -> . LPAREN function RPAREN
@@ -352,18 +348,18 @@ state 7
     (8) code_block -> . LPAREN function RPAREN code_block
     (9) code_block -> . LPAREN general_expression RPAREN code_block
 
-    LPAREN          shift and go to state 52
+    LPAREN          shift and go to state 51
 
-    code_block                     shift and go to state 51
+    code_block                     shift and go to state 50
 
-state 8
+state 7
 
     (5) compute -> while .
 
     RPAREN          reduce using rule 5 (compute -> while .)
 
 
-state 9
+state 8
 
     (10) function -> FUNCTION_PRINTLN . multipleObjects
     (22) multipleObjects -> . value
@@ -386,39 +382,39 @@ state 9
     (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
     (37) list -> . LPAREN LIST multipleObjects RPAREN
 
-    STRING          shift and go to state 56
-    NUMBER          shift and go to state 57
-    FLOAT           shift and go to state 58
-    BOOLEAN_TRUE    shift and go to state 59
-    BOOLEAN_FALSE   shift and go to state 60
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    STRING          shift and go to state 55
+    NUMBER          shift and go to state 56
+    FLOAT           shift and go to state 57
+    BOOLEAN_TRUE    shift and go to state 58
+    BOOLEAN_FALSE   shift and go to state 59
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    multipleObjects                shift and go to state 53
-    value                          shift and go to state 54
-    sequential_colls               shift and go to state 55
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    multipleObjects                shift and go to state 52
+    value                          shift and go to state 53
+    sequential_colls               shift and go to state 54
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
-state 10
+state 9
 
     (11) function -> READLINE .
 
     RPAREN          reduce using rule 11 (function -> READLINE .)
 
 
-state 11
+state 10
 
     (12) function -> FUNCTION_EMPTY . STRING
 
-    STRING          shift and go to state 69
+    STRING          shift and go to state 68
 
 
-state 12
+state 11
 
     (17) function -> TYPE_STR . multiplestring
     (13) multiplestring -> . STRING
@@ -427,31 +423,31 @@ state 12
     (16) multiplestring -> . stament multiplestring
     (1) stament -> . LPAREN compute RPAREN
 
-    STRING          shift and go to state 71
+    STRING          shift and go to state 70
     LPAREN          shift and go to state 2
 
-    multiplestring                 shift and go to state 70
-    stament                        shift and go to state 72
+    multiplestring                 shift and go to state 69
+    stament                        shift and go to state 71
 
-state 13
+state 12
 
     (18) function -> FUNCTION_SUB . STRING NUMBER
     (19) function -> FUNCTION_SUB . ID NUMBER
 
-    STRING          shift and go to state 73
-    ID              shift and go to state 74
+    STRING          shift and go to state 72
+    ID              shift and go to state 73
 
 
-state 14
+state 13
 
     (20) function -> FUNCTION_SEQ . STRING
     (21) function -> FUNCTION_SEQ . ID
 
-    STRING          shift and go to state 75
-    ID              shift and go to state 76
+    STRING          shift and go to state 74
+    ID              shift and go to state 75
 
 
-state 15
+state 14
 
     (33) function -> FUNCTION_GET . sequential_colls NUMBER
     (38) sequential_colls -> . vector
@@ -465,18 +461,18 @@ state 15
     (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
     (37) list -> . LPAREN LIST multipleObjects RPAREN
 
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    sequential_colls               shift and go to state 77
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    sequential_colls               shift and go to state 76
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
-state 16
+state 15
 
     (34) function -> FUNCTION_COUNT . sequential_colls
     (38) sequential_colls -> . vector
@@ -490,18 +486,18 @@ state 16
     (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
     (37) list -> . LPAREN LIST multipleObjects RPAREN
 
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    sequential_colls               shift and go to state 78
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    sequential_colls               shift and go to state 77
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
-state 17
+state 16
 
     (35) function -> FUNCTION_CONJ . sequential_colls multipleObjects
     (38) sequential_colls -> . vector
@@ -515,160 +511,169 @@ state 17
     (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
     (37) list -> . LPAREN LIST multipleObjects RPAREN
 
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    sequential_colls               shift and go to state 79
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    sequential_colls               shift and go to state 78
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
-state 18
+state 17
 
     (49) general_expression -> math_operation .
 
     RPAREN          reduce using rule 49 (general_expression -> math_operation .)
 
 
-state 19
+state 18
 
     (50) general_expression -> boolean_operation .
 
     RPAREN          reduce using rule 50 (general_expression -> boolean_operation .)
 
 
-state 20
+state 19
 
     (51) general_expression -> variable_expression .
 
     RPAREN          reduce using rule 51 (general_expression -> variable_expression .)
 
 
-state 21
+state 20
 
     (52) general_expression -> setFunctions_union .
 
     RPAREN          reduce using rule 52 (general_expression -> setFunctions_union .)
 
 
-state 22
+state 21
 
     (53) general_expression -> setFunctions_intersection .
 
     RPAREN          reduce using rule 53 (general_expression -> setFunctions_intersection .)
 
 
-state 23
+state 22
 
     (54) general_expression -> setFunctions_difference .
 
     RPAREN          reduce using rule 54 (general_expression -> setFunctions_difference .)
 
 
-state 24
+state 23
 
     (55) general_expression -> function_take .
 
     RPAREN          reduce using rule 55 (general_expression -> function_take .)
 
 
-state 25
+state 24
 
     (56) general_expression -> function_drop .
 
     RPAREN          reduce using rule 56 (general_expression -> function_drop .)
 
 
+state 25
+
+    (81) control_structure -> if .
+
+    LPAREN          reduce using rule 81 (control_structure -> if .)
+
+
 state 26
 
-    (78) control_structure -> if .
+    (82) control_structure -> for .
 
-    LPAREN          reduce using rule 78 (control_structure -> if .)
+    LPAREN          reduce using rule 82 (control_structure -> for .)
 
 
 state 27
 
-    (79) control_structure -> for .
+    (85) while -> WHILE . LPAREN boolean_operation RPAREN do
 
-    LPAREN          reduce using rule 79 (control_structure -> for .)
+    LPAREN          shift and go to state 79
 
 
 state 28
 
-    (82) while -> WHILE . LPAREN boolean_operation RPAREN do
+    (58) math_operation -> PLUS . num_expression num_expression
+    (57) num_expression -> . LPAREN math_operation RPAREN
+    (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    LPAREN          shift and go to state 80
+    LPAREN          shift and go to state 81
+    NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
+    num_expression                 shift and go to state 80
 
 state 29
 
-    (58) math_operation -> PLUS . num_expression NUMBER
+    (59) math_operation -> MINUS . num_expression num_expression
     (57) num_expression -> . LPAREN math_operation RPAREN
     (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    LPAREN          shift and go to state 83
+    LPAREN          shift and go to state 81
     NUMBER          shift and go to state 82
-
-    num_expression                 shift and go to state 81
-
-state 30
-
-    (59) math_operation -> MINUS . num_expression NUMBER
-    (57) num_expression -> . LPAREN math_operation RPAREN
-    (62) num_expression -> . NUMBER
-
-    LPAREN          shift and go to state 83
-    NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
     num_expression                 shift and go to state 84
 
-state 31
+state 30
 
-    (60) math_operation -> DIVIDE . num_expression NUMBER
+    (60) math_operation -> DIVIDE . num_expression num_expression
     (57) num_expression -> . LPAREN math_operation RPAREN
     (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    LPAREN          shift and go to state 83
+    LPAREN          shift and go to state 81
     NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
     num_expression                 shift and go to state 85
 
-state 32
+state 31
 
-    (61) math_operation -> TIMES . num_expression NUMBER
+    (61) math_operation -> TIMES . num_expression num_expression
     (57) num_expression -> . LPAREN math_operation RPAREN
     (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    LPAREN          shift and go to state 83
+    LPAREN          shift and go to state 81
     NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
     num_expression                 shift and go to state 86
 
+state 32
+
+    (64) boolean_operation -> bool_operation .
+
+    RPAREN          reduce using rule 64 (boolean_operation -> bool_operation .)
+
+
 state 33
 
-    (63) boolean_operation -> bool_operation .
+    (65) boolean_operation -> compare_operation .
 
-    RPAREN          reduce using rule 63 (boolean_operation -> bool_operation .)
+    RPAREN          reduce using rule 65 (boolean_operation -> compare_operation .)
 
 
 state 34
 
-    (64) boolean_operation -> compare_operation .
-
-    RPAREN          reduce using rule 64 (boolean_operation -> compare_operation .)
-
-
-state 35
-
-    (77) variable_expression -> DEF . ID multipleObjects
+    (79) variable_expression -> DEF . ID multipleObjects
+    (80) variable_expression -> DEF . ID LPAREN general_expression RPAREN
 
     ID              shift and go to state 87
 
 
-state 36
+state 35
 
     (44) setFunctions_union -> SET . DIVIDE UNION set set
     (46) setFunctions_intersection -> SET . DIVIDE INTERSECTION set set
@@ -677,141 +682,159 @@ state 36
     DIVIDE          shift and go to state 88
 
 
+state 36
+
+    (47) function_take -> TAKE . NUMBER sequential_colls
+
+    NUMBER          shift and go to state 89
+
+
 state 37
 
-    (84) if -> IF . LPAREN boolean_operation RPAREN
+    (48) function_drop -> DROP . NUMBER sequential_colls
 
-    LPAREN          shift and go to state 89
+    NUMBER          shift and go to state 90
 
 
 state 38
 
-    (80) for -> FOR . LBRACKET ID sequential_colls RBRACKET
-    (81) for -> FOR . LBRACKET ID ID RBRACKET
+    (87) if -> IF . LPAREN boolean_operation RPAREN
 
-    LBRACKET        shift and go to state 90
+    LPAREN          shift and go to state 91
 
 
 state 39
 
-    (66) bool_operation -> AND . bool_expression bool_expression
-    (65) bool_expression -> . LPAREN bool_operation RPAREN
-    (69) bool_expression -> . BOOLEAN_TRUE
-    (70) bool_expression -> . BOOLEAN_FALSE
+    (83) for -> FOR . LBRACKET ID sequential_colls RBRACKET
+    (84) for -> FOR . LBRACKET ID ID RBRACKET
 
-    LPAREN          shift and go to state 92
-    BOOLEAN_TRUE    shift and go to state 93
-    BOOLEAN_FALSE   shift and go to state 94
+    LBRACKET        shift and go to state 92
 
-    bool_expression                shift and go to state 91
 
 state 40
 
-    (67) bool_operation -> OR . bool_expression bool_expression
-    (65) bool_expression -> . LPAREN bool_operation RPAREN
-    (69) bool_expression -> . BOOLEAN_TRUE
-    (70) bool_expression -> . BOOLEAN_FALSE
+    (67) bool_operation -> AND . bool_expression bool_expression
+    (66) bool_expression -> . LPAREN bool_operation RPAREN
+    (70) bool_expression -> . BOOLEAN_TRUE
+    (71) bool_expression -> . BOOLEAN_FALSE
+    (72) bool_expression -> . ID
 
-    LPAREN          shift and go to state 92
-    BOOLEAN_TRUE    shift and go to state 93
-    BOOLEAN_FALSE   shift and go to state 94
+    LPAREN          shift and go to state 94
+    BOOLEAN_TRUE    shift and go to state 95
+    BOOLEAN_FALSE   shift and go to state 96
+    ID              shift and go to state 97
 
-    bool_expression                shift and go to state 95
+    bool_expression                shift and go to state 93
 
 state 41
 
-    (68) bool_operation -> NOT . bool_expression
-    (65) bool_expression -> . LPAREN bool_operation RPAREN
-    (69) bool_expression -> . BOOLEAN_TRUE
-    (70) bool_expression -> . BOOLEAN_FALSE
+    (68) bool_operation -> OR . bool_expression bool_expression
+    (66) bool_expression -> . LPAREN bool_operation RPAREN
+    (70) bool_expression -> . BOOLEAN_TRUE
+    (71) bool_expression -> . BOOLEAN_FALSE
+    (72) bool_expression -> . ID
 
-    LPAREN          shift and go to state 92
-    BOOLEAN_TRUE    shift and go to state 93
-    BOOLEAN_FALSE   shift and go to state 94
+    LPAREN          shift and go to state 94
+    BOOLEAN_TRUE    shift and go to state 95
+    BOOLEAN_FALSE   shift and go to state 96
+    ID              shift and go to state 97
 
-    bool_expression                shift and go to state 96
+    bool_expression                shift and go to state 98
 
 state 42
 
-    (71) compare_operation -> GREATERTHAN . num_expression num_expression
-    (57) num_expression -> . LPAREN math_operation RPAREN
-    (62) num_expression -> . NUMBER
+    (69) bool_operation -> NOT . bool_expression
+    (66) bool_expression -> . LPAREN bool_operation RPAREN
+    (70) bool_expression -> . BOOLEAN_TRUE
+    (71) bool_expression -> . BOOLEAN_FALSE
+    (72) bool_expression -> . ID
 
-    LPAREN          shift and go to state 83
-    NUMBER          shift and go to state 82
+    LPAREN          shift and go to state 94
+    BOOLEAN_TRUE    shift and go to state 95
+    BOOLEAN_FALSE   shift and go to state 96
+    ID              shift and go to state 97
 
-    num_expression                 shift and go to state 97
+    bool_expression                shift and go to state 99
 
 state 43
 
-    (72) compare_operation -> LESSTHAN . num_expression num_expression
+    (73) compare_operation -> GREATERTHAN . num_expression num_expression
     (57) num_expression -> . LPAREN math_operation RPAREN
     (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    LPAREN          shift and go to state 83
+    LPAREN          shift and go to state 81
     NUMBER          shift and go to state 82
-
-    num_expression                 shift and go to state 98
-
-state 44
-
-    (73) compare_operation -> GREATERTHANEQUALS . num_expression num_expression
-    (57) num_expression -> . LPAREN math_operation RPAREN
-    (62) num_expression -> . NUMBER
-
-    LPAREN          shift and go to state 83
-    NUMBER          shift and go to state 82
-
-    num_expression                 shift and go to state 99
-
-state 45
-
-    (74) compare_operation -> LESSTHANEQUALS . num_expression num_expression
-    (57) num_expression -> . LPAREN math_operation RPAREN
-    (62) num_expression -> . NUMBER
-
-    LPAREN          shift and go to state 83
-    NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
     num_expression                 shift and go to state 100
 
-state 46
+state 44
 
-    (75) compare_operation -> EQUAL . num_expression num_expression
+    (74) compare_operation -> LESSTHAN . num_expression num_expression
     (57) num_expression -> . LPAREN math_operation RPAREN
     (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    LPAREN          shift and go to state 83
+    LPAREN          shift and go to state 81
     NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
     num_expression                 shift and go to state 101
 
-state 47
+state 45
 
-    (76) compare_operation -> NOTEQUAL . num_expression num_expression
+    (75) compare_operation -> GREATERTHANEQUALS . num_expression num_expression
     (57) num_expression -> . LPAREN math_operation RPAREN
     (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    LPAREN          shift and go to state 83
+    LPAREN          shift and go to state 81
     NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
     num_expression                 shift and go to state 102
 
+state 46
+
+    (76) compare_operation -> LESSTHANEQUALS . num_expression num_expression
+    (57) num_expression -> . LPAREN math_operation RPAREN
+    (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
+
+    LPAREN          shift and go to state 81
+    NUMBER          shift and go to state 82
+    ID              shift and go to state 83
+
+    num_expression                 shift and go to state 103
+
+state 47
+
+    (77) compare_operation -> EQUAL . num_expression num_expression
+    (57) num_expression -> . LPAREN math_operation RPAREN
+    (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
+
+    LPAREN          shift and go to state 81
+    NUMBER          shift and go to state 82
+    ID              shift and go to state 83
+
+    num_expression                 shift and go to state 104
+
 state 48
 
-    (47) function_take -> LPAREN TAKE . NUMBER sequential_colls
+    (78) compare_operation -> NOTEQUAL . num_expression num_expression
+    (57) num_expression -> . LPAREN math_operation RPAREN
+    (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    NUMBER          shift and go to state 103
+    LPAREN          shift and go to state 81
+    NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
+    num_expression                 shift and go to state 105
 
 state 49
-
-    (48) function_drop -> LPAREN DROP . NUMBER sequential_colls
-
-    NUMBER          shift and go to state 104
-
-
-state 50
 
     (1) stament -> LPAREN compute RPAREN .
 
@@ -821,14 +844,14 @@ state 50
     RPAREN          reduce using rule 1 (stament -> LPAREN compute RPAREN .)
 
 
-state 51
+state 50
 
     (4) compute -> control_structure code_block .
 
     RPAREN          reduce using rule 4 (compute -> control_structure code_block .)
 
 
-state 52
+state 51
 
     (6) code_block -> LPAREN . function RPAREN
     (7) code_block -> LPAREN . general_expression RPAREN
@@ -853,75 +876,77 @@ state 52
     (54) general_expression -> . setFunctions_difference
     (55) general_expression -> . function_take
     (56) general_expression -> . function_drop
-    (58) math_operation -> . PLUS num_expression NUMBER
-    (59) math_operation -> . MINUS num_expression NUMBER
-    (60) math_operation -> . DIVIDE num_expression NUMBER
-    (61) math_operation -> . TIMES num_expression NUMBER
-    (63) boolean_operation -> . bool_operation
-    (64) boolean_operation -> . compare_operation
-    (77) variable_expression -> . DEF ID multipleObjects
+    (58) math_operation -> . PLUS num_expression num_expression
+    (59) math_operation -> . MINUS num_expression num_expression
+    (60) math_operation -> . DIVIDE num_expression num_expression
+    (61) math_operation -> . TIMES num_expression num_expression
+    (64) boolean_operation -> . bool_operation
+    (65) boolean_operation -> . compare_operation
+    (79) variable_expression -> . DEF ID multipleObjects
+    (80) variable_expression -> . DEF ID LPAREN general_expression RPAREN
     (44) setFunctions_union -> . SET DIVIDE UNION set set
     (46) setFunctions_intersection -> . SET DIVIDE INTERSECTION set set
     (45) setFunctions_difference -> . SET DIVIDE DIFFERENCE set set
-    (47) function_take -> . LPAREN TAKE NUMBER sequential_colls
-    (48) function_drop -> . LPAREN DROP NUMBER sequential_colls
-    (66) bool_operation -> . AND bool_expression bool_expression
-    (67) bool_operation -> . OR bool_expression bool_expression
-    (68) bool_operation -> . NOT bool_expression
-    (71) compare_operation -> . GREATERTHAN num_expression num_expression
-    (72) compare_operation -> . LESSTHAN num_expression num_expression
-    (73) compare_operation -> . GREATERTHANEQUALS num_expression num_expression
-    (74) compare_operation -> . LESSTHANEQUALS num_expression num_expression
-    (75) compare_operation -> . EQUAL num_expression num_expression
-    (76) compare_operation -> . NOTEQUAL num_expression num_expression
+    (47) function_take -> . TAKE NUMBER sequential_colls
+    (48) function_drop -> . DROP NUMBER sequential_colls
+    (67) bool_operation -> . AND bool_expression bool_expression
+    (68) bool_operation -> . OR bool_expression bool_expression
+    (69) bool_operation -> . NOT bool_expression
+    (73) compare_operation -> . GREATERTHAN num_expression num_expression
+    (74) compare_operation -> . LESSTHAN num_expression num_expression
+    (75) compare_operation -> . GREATERTHANEQUALS num_expression num_expression
+    (76) compare_operation -> . LESSTHANEQUALS num_expression num_expression
+    (77) compare_operation -> . EQUAL num_expression num_expression
+    (78) compare_operation -> . NOTEQUAL num_expression num_expression
 
-    FUNCTION_PRINTLN shift and go to state 9
-    READLINE        shift and go to state 10
-    FUNCTION_EMPTY  shift and go to state 11
-    TYPE_STR        shift and go to state 12
-    FUNCTION_SUB    shift and go to state 13
-    FUNCTION_SEQ    shift and go to state 14
-    FUNCTION_GET    shift and go to state 15
-    FUNCTION_COUNT  shift and go to state 16
-    FUNCTION_CONJ   shift and go to state 17
-    PLUS            shift and go to state 29
-    MINUS           shift and go to state 30
-    DIVIDE          shift and go to state 31
-    TIMES           shift and go to state 32
-    DEF             shift and go to state 35
-    SET             shift and go to state 36
-    LPAREN          shift and go to state 3
-    AND             shift and go to state 39
-    OR              shift and go to state 40
-    NOT             shift and go to state 41
-    GREATERTHAN     shift and go to state 42
-    LESSTHAN        shift and go to state 43
-    GREATERTHANEQUALS shift and go to state 44
-    LESSTHANEQUALS  shift and go to state 45
-    EQUAL           shift and go to state 46
-    NOTEQUAL        shift and go to state 47
+    FUNCTION_PRINTLN shift and go to state 8
+    READLINE        shift and go to state 9
+    FUNCTION_EMPTY  shift and go to state 10
+    TYPE_STR        shift and go to state 11
+    FUNCTION_SUB    shift and go to state 12
+    FUNCTION_SEQ    shift and go to state 13
+    FUNCTION_GET    shift and go to state 14
+    FUNCTION_COUNT  shift and go to state 15
+    FUNCTION_CONJ   shift and go to state 16
+    PLUS            shift and go to state 28
+    MINUS           shift and go to state 29
+    DIVIDE          shift and go to state 30
+    TIMES           shift and go to state 31
+    DEF             shift and go to state 34
+    SET             shift and go to state 35
+    TAKE            shift and go to state 36
+    DROP            shift and go to state 37
+    AND             shift and go to state 40
+    OR              shift and go to state 41
+    NOT             shift and go to state 42
+    GREATERTHAN     shift and go to state 43
+    LESSTHAN        shift and go to state 44
+    GREATERTHANEQUALS shift and go to state 45
+    LESSTHANEQUALS  shift and go to state 46
+    EQUAL           shift and go to state 47
+    NOTEQUAL        shift and go to state 48
 
-    function                       shift and go to state 105
-    general_expression             shift and go to state 106
-    math_operation                 shift and go to state 18
-    boolean_operation              shift and go to state 19
-    variable_expression            shift and go to state 20
-    setFunctions_union             shift and go to state 21
-    setFunctions_intersection      shift and go to state 22
-    setFunctions_difference        shift and go to state 23
-    function_take                  shift and go to state 24
-    function_drop                  shift and go to state 25
-    bool_operation                 shift and go to state 33
-    compare_operation              shift and go to state 34
+    function                       shift and go to state 106
+    general_expression             shift and go to state 107
+    math_operation                 shift and go to state 17
+    boolean_operation              shift and go to state 18
+    variable_expression            shift and go to state 19
+    setFunctions_union             shift and go to state 20
+    setFunctions_intersection      shift and go to state 21
+    setFunctions_difference        shift and go to state 22
+    function_take                  shift and go to state 23
+    function_drop                  shift and go to state 24
+    bool_operation                 shift and go to state 32
+    compare_operation              shift and go to state 33
 
-state 53
+state 52
 
     (10) function -> FUNCTION_PRINTLN multipleObjects .
 
     RPAREN          reduce using rule 10 (function -> FUNCTION_PRINTLN multipleObjects .)
 
 
-state 54
+state 53
 
     (22) multipleObjects -> value .
     (23) multipleObjects -> value . multipleObjects
@@ -948,25 +973,25 @@ state 54
     RPAREN          reduce using rule 22 (multipleObjects -> value .)
     RBRACKET        reduce using rule 22 (multipleObjects -> value .)
     RCURLYBRA       reduce using rule 22 (multipleObjects -> value .)
-    STRING          shift and go to state 56
-    NUMBER          shift and go to state 57
-    FLOAT           shift and go to state 58
-    BOOLEAN_TRUE    shift and go to state 59
-    BOOLEAN_FALSE   shift and go to state 60
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    STRING          shift and go to state 55
+    NUMBER          shift and go to state 56
+    FLOAT           shift and go to state 57
+    BOOLEAN_TRUE    shift and go to state 58
+    BOOLEAN_FALSE   shift and go to state 59
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    value                          shift and go to state 54
-    multipleObjects                shift and go to state 107
-    sequential_colls               shift and go to state 55
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    value                          shift and go to state 53
+    multipleObjects                shift and go to state 108
+    sequential_colls               shift and go to state 54
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
-state 55
+state 54
 
     (24) multipleObjects -> sequential_colls .
     (25) multipleObjects -> sequential_colls . multipleObjects
@@ -993,25 +1018,25 @@ state 55
     RPAREN          reduce using rule 24 (multipleObjects -> sequential_colls .)
     RBRACKET        reduce using rule 24 (multipleObjects -> sequential_colls .)
     RCURLYBRA       reduce using rule 24 (multipleObjects -> sequential_colls .)
-    STRING          shift and go to state 56
-    NUMBER          shift and go to state 57
-    FLOAT           shift and go to state 58
-    BOOLEAN_TRUE    shift and go to state 59
-    BOOLEAN_FALSE   shift and go to state 60
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    STRING          shift and go to state 55
+    NUMBER          shift and go to state 56
+    FLOAT           shift and go to state 57
+    BOOLEAN_TRUE    shift and go to state 58
+    BOOLEAN_FALSE   shift and go to state 59
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    sequential_colls               shift and go to state 55
-    multipleObjects                shift and go to state 108
-    value                          shift and go to state 54
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    sequential_colls               shift and go to state 54
+    multipleObjects                shift and go to state 109
+    value                          shift and go to state 53
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
-state 56
+state 55
 
     (26) value -> STRING .
 
@@ -1030,7 +1055,7 @@ state 56
     RCURLYBRA       reduce using rule 26 (value -> STRING .)
 
 
-state 57
+state 56
 
     (27) value -> NUMBER .
 
@@ -1049,7 +1074,7 @@ state 57
     RCURLYBRA       reduce using rule 27 (value -> NUMBER .)
 
 
-state 58
+state 57
 
     (28) value -> FLOAT .
 
@@ -1068,7 +1093,7 @@ state 58
     RCURLYBRA       reduce using rule 28 (value -> FLOAT .)
 
 
-state 59
+state 58
 
     (29) value -> BOOLEAN_TRUE .
 
@@ -1087,7 +1112,7 @@ state 59
     RCURLYBRA       reduce using rule 29 (value -> BOOLEAN_TRUE .)
 
 
-state 60
+state 59
 
     (30) value -> BOOLEAN_FALSE .
 
@@ -1106,7 +1131,7 @@ state 60
     RCURLYBRA       reduce using rule 30 (value -> BOOLEAN_FALSE .)
 
 
-state 61
+state 60
 
     (38) sequential_colls -> vector .
 
@@ -1125,7 +1150,7 @@ state 61
     RCURLYBRA       reduce using rule 38 (sequential_colls -> vector .)
 
 
-state 62
+state 61
 
     (39) sequential_colls -> set .
 
@@ -1144,7 +1169,7 @@ state 62
     RCURLYBRA       reduce using rule 39 (sequential_colls -> set .)
 
 
-state 63
+state 62
 
     (40) sequential_colls -> list .
 
@@ -1163,7 +1188,7 @@ state 63
     RCURLYBRA       reduce using rule 40 (sequential_colls -> list .)
 
 
-state 64
+state 63
 
     (41) sequential_colls -> ID .
 
@@ -1182,7 +1207,7 @@ state 64
     RCURLYBRA       reduce using rule 41 (sequential_colls -> ID .)
 
 
-state 65
+state 64
 
     (31) vector -> LBRACKET . multipleObjects RBRACKET
     (22) multipleObjects -> . value
@@ -1205,64 +1230,64 @@ state 65
     (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
     (37) list -> . LPAREN LIST multipleObjects RPAREN
 
-    STRING          shift and go to state 56
-    NUMBER          shift and go to state 57
-    FLOAT           shift and go to state 58
-    BOOLEAN_TRUE    shift and go to state 59
-    BOOLEAN_FALSE   shift and go to state 60
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    STRING          shift and go to state 55
+    NUMBER          shift and go to state 56
+    FLOAT           shift and go to state 57
+    BOOLEAN_TRUE    shift and go to state 58
+    BOOLEAN_FALSE   shift and go to state 59
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    multipleObjects                shift and go to state 109
-    value                          shift and go to state 54
-    sequential_colls               shift and go to state 55
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    multipleObjects                shift and go to state 110
+    value                          shift and go to state 53
+    sequential_colls               shift and go to state 54
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
-state 66
+state 65
 
     (32) vector -> LPAREN . VECTOR multipleObjects RPAREN
     (43) set -> LPAREN . SET multipleObjects RPAREN
     (37) list -> LPAREN . LIST multipleObjects RPAREN
 
-    VECTOR          shift and go to state 110
-    SET             shift and go to state 111
-    LIST            shift and go to state 112
+    VECTOR          shift and go to state 111
+    SET             shift and go to state 112
+    LIST            shift and go to state 113
+
+
+state 66
+
+    (42) set -> SETDEF . LCURLYBRA multipleObjects RCURLYBRA
+
+    LCURLYBRA       shift and go to state 114
 
 
 state 67
 
-    (42) set -> SETDEF . LCURLYBRA multipleObjects RCURLYBRA
+    (36) list -> APOSTROPHE . LPAREN multipleObjects RPAREN
 
-    LCURLYBRA       shift and go to state 113
+    LPAREN          shift and go to state 115
 
 
 state 68
-
-    (36) list -> APOSTROPHE . LPAREN multipleObjects RPAREN
-
-    LPAREN          shift and go to state 114
-
-
-state 69
 
     (12) function -> FUNCTION_EMPTY STRING .
 
     RPAREN          reduce using rule 12 (function -> FUNCTION_EMPTY STRING .)
 
 
-state 70
+state 69
 
     (17) function -> TYPE_STR multiplestring .
 
     RPAREN          reduce using rule 17 (function -> TYPE_STR multiplestring .)
 
 
-state 71
+state 70
 
     (13) multiplestring -> STRING .
     (14) multiplestring -> STRING . multiplestring
@@ -1273,13 +1298,13 @@ state 71
     (1) stament -> . LPAREN compute RPAREN
 
     RPAREN          reduce using rule 13 (multiplestring -> STRING .)
-    STRING          shift and go to state 71
+    STRING          shift and go to state 70
     LPAREN          shift and go to state 2
 
-    multiplestring                 shift and go to state 115
-    stament                        shift and go to state 72
+    multiplestring                 shift and go to state 116
+    stament                        shift and go to state 71
 
-state 72
+state 71
 
     (15) multiplestring -> stament .
     (16) multiplestring -> stament . multiplestring
@@ -1290,55 +1315,55 @@ state 72
     (1) stament -> . LPAREN compute RPAREN
 
     RPAREN          reduce using rule 15 (multiplestring -> stament .)
-    STRING          shift and go to state 71
+    STRING          shift and go to state 70
     LPAREN          shift and go to state 2
 
-    stament                        shift and go to state 72
-    multiplestring                 shift and go to state 116
+    stament                        shift and go to state 71
+    multiplestring                 shift and go to state 117
 
-state 73
+state 72
 
     (18) function -> FUNCTION_SUB STRING . NUMBER
-
-    NUMBER          shift and go to state 117
-
-
-state 74
-
-    (19) function -> FUNCTION_SUB ID . NUMBER
 
     NUMBER          shift and go to state 118
 
 
-state 75
+state 73
+
+    (19) function -> FUNCTION_SUB ID . NUMBER
+
+    NUMBER          shift and go to state 119
+
+
+state 74
 
     (20) function -> FUNCTION_SEQ STRING .
 
     RPAREN          reduce using rule 20 (function -> FUNCTION_SEQ STRING .)
 
 
-state 76
+state 75
 
     (21) function -> FUNCTION_SEQ ID .
 
     RPAREN          reduce using rule 21 (function -> FUNCTION_SEQ ID .)
 
 
-state 77
+state 76
 
     (33) function -> FUNCTION_GET sequential_colls . NUMBER
 
-    NUMBER          shift and go to state 119
+    NUMBER          shift and go to state 120
 
 
-state 78
+state 77
 
     (34) function -> FUNCTION_COUNT sequential_colls .
 
     RPAREN          reduce using rule 34 (function -> FUNCTION_COUNT sequential_colls .)
 
 
-state 79
+state 78
 
     (35) function -> FUNCTION_CONJ sequential_colls . multipleObjects
     (22) multipleObjects -> . value
@@ -1361,108 +1386,144 @@ state 79
     (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
     (37) list -> . LPAREN LIST multipleObjects RPAREN
 
-    STRING          shift and go to state 56
-    NUMBER          shift and go to state 57
-    FLOAT           shift and go to state 58
-    BOOLEAN_TRUE    shift and go to state 59
-    BOOLEAN_FALSE   shift and go to state 60
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    STRING          shift and go to state 55
+    NUMBER          shift and go to state 56
+    FLOAT           shift and go to state 57
+    BOOLEAN_TRUE    shift and go to state 58
+    BOOLEAN_FALSE   shift and go to state 59
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    sequential_colls               shift and go to state 55
-    multipleObjects                shift and go to state 120
-    value                          shift and go to state 54
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    sequential_colls               shift and go to state 54
+    multipleObjects                shift and go to state 121
+    value                          shift and go to state 53
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
+
+state 79
+
+    (85) while -> WHILE LPAREN . boolean_operation RPAREN do
+    (64) boolean_operation -> . bool_operation
+    (65) boolean_operation -> . compare_operation
+    (67) bool_operation -> . AND bool_expression bool_expression
+    (68) bool_operation -> . OR bool_expression bool_expression
+    (69) bool_operation -> . NOT bool_expression
+    (73) compare_operation -> . GREATERTHAN num_expression num_expression
+    (74) compare_operation -> . LESSTHAN num_expression num_expression
+    (75) compare_operation -> . GREATERTHANEQUALS num_expression num_expression
+    (76) compare_operation -> . LESSTHANEQUALS num_expression num_expression
+    (77) compare_operation -> . EQUAL num_expression num_expression
+    (78) compare_operation -> . NOTEQUAL num_expression num_expression
+
+    AND             shift and go to state 40
+    OR              shift and go to state 41
+    NOT             shift and go to state 42
+    GREATERTHAN     shift and go to state 43
+    LESSTHAN        shift and go to state 44
+    GREATERTHANEQUALS shift and go to state 45
+    LESSTHANEQUALS  shift and go to state 46
+    EQUAL           shift and go to state 47
+    NOTEQUAL        shift and go to state 48
+
+    boolean_operation              shift and go to state 122
+    bool_operation                 shift and go to state 32
+    compare_operation              shift and go to state 33
 
 state 80
 
-    (82) while -> WHILE LPAREN . boolean_operation RPAREN do
-    (63) boolean_operation -> . bool_operation
-    (64) boolean_operation -> . compare_operation
-    (66) bool_operation -> . AND bool_expression bool_expression
-    (67) bool_operation -> . OR bool_expression bool_expression
-    (68) bool_operation -> . NOT bool_expression
-    (71) compare_operation -> . GREATERTHAN num_expression num_expression
-    (72) compare_operation -> . LESSTHAN num_expression num_expression
-    (73) compare_operation -> . GREATERTHANEQUALS num_expression num_expression
-    (74) compare_operation -> . LESSTHANEQUALS num_expression num_expression
-    (75) compare_operation -> . EQUAL num_expression num_expression
-    (76) compare_operation -> . NOTEQUAL num_expression num_expression
+    (58) math_operation -> PLUS num_expression . num_expression
+    (57) num_expression -> . LPAREN math_operation RPAREN
+    (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    AND             shift and go to state 39
-    OR              shift and go to state 40
-    NOT             shift and go to state 41
-    GREATERTHAN     shift and go to state 42
-    LESSTHAN        shift and go to state 43
-    GREATERTHANEQUALS shift and go to state 44
-    LESSTHANEQUALS  shift and go to state 45
-    EQUAL           shift and go to state 46
-    NOTEQUAL        shift and go to state 47
+    LPAREN          shift and go to state 81
+    NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
-    boolean_operation              shift and go to state 121
-    bool_operation                 shift and go to state 33
-    compare_operation              shift and go to state 34
+    num_expression                 shift and go to state 123
 
 state 81
 
-    (58) math_operation -> PLUS num_expression . NUMBER
+    (57) num_expression -> LPAREN . math_operation RPAREN
+    (58) math_operation -> . PLUS num_expression num_expression
+    (59) math_operation -> . MINUS num_expression num_expression
+    (60) math_operation -> . DIVIDE num_expression num_expression
+    (61) math_operation -> . TIMES num_expression num_expression
 
-    NUMBER          shift and go to state 122
+    PLUS            shift and go to state 28
+    MINUS           shift and go to state 29
+    DIVIDE          shift and go to state 30
+    TIMES           shift and go to state 31
 
+    math_operation                 shift and go to state 124
 
 state 82
 
     (62) num_expression -> NUMBER .
 
-    NUMBER          reduce using rule 62 (num_expression -> NUMBER .)
     LPAREN          reduce using rule 62 (num_expression -> NUMBER .)
+    NUMBER          reduce using rule 62 (num_expression -> NUMBER .)
+    ID              reduce using rule 62 (num_expression -> NUMBER .)
     RPAREN          reduce using rule 62 (num_expression -> NUMBER .)
 
 
 state 83
 
-    (57) num_expression -> LPAREN . math_operation RPAREN
-    (58) math_operation -> . PLUS num_expression NUMBER
-    (59) math_operation -> . MINUS num_expression NUMBER
-    (60) math_operation -> . DIVIDE num_expression NUMBER
-    (61) math_operation -> . TIMES num_expression NUMBER
+    (63) num_expression -> ID .
 
-    PLUS            shift and go to state 29
-    MINUS           shift and go to state 30
-    DIVIDE          shift and go to state 31
-    TIMES           shift and go to state 32
+    LPAREN          reduce using rule 63 (num_expression -> ID .)
+    NUMBER          reduce using rule 63 (num_expression -> ID .)
+    ID              reduce using rule 63 (num_expression -> ID .)
+    RPAREN          reduce using rule 63 (num_expression -> ID .)
 
-    math_operation                 shift and go to state 123
 
 state 84
 
-    (59) math_operation -> MINUS num_expression . NUMBER
+    (59) math_operation -> MINUS num_expression . num_expression
+    (57) num_expression -> . LPAREN math_operation RPAREN
+    (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    NUMBER          shift and go to state 124
+    LPAREN          shift and go to state 81
+    NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
+    num_expression                 shift and go to state 125
 
 state 85
 
-    (60) math_operation -> DIVIDE num_expression . NUMBER
+    (60) math_operation -> DIVIDE num_expression . num_expression
+    (57) num_expression -> . LPAREN math_operation RPAREN
+    (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    NUMBER          shift and go to state 125
+    LPAREN          shift and go to state 81
+    NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
+    num_expression                 shift and go to state 126
 
 state 86
 
-    (61) math_operation -> TIMES num_expression . NUMBER
+    (61) math_operation -> TIMES num_expression . num_expression
+    (57) num_expression -> . LPAREN math_operation RPAREN
+    (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    NUMBER          shift and go to state 126
+    LPAREN          shift and go to state 81
+    NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
+    num_expression                 shift and go to state 127
 
 state 87
 
-    (77) variable_expression -> DEF ID . multipleObjects
+    (79) variable_expression -> DEF ID . multipleObjects
+    (80) variable_expression -> DEF ID . LPAREN general_expression RPAREN
     (22) multipleObjects -> . value
     (23) multipleObjects -> . value multipleObjects
     (24) multipleObjects -> . sequential_colls
@@ -1483,23 +1544,23 @@ state 87
     (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
     (37) list -> . LPAREN LIST multipleObjects RPAREN
 
-    STRING          shift and go to state 56
-    NUMBER          shift and go to state 57
-    FLOAT           shift and go to state 58
-    BOOLEAN_TRUE    shift and go to state 59
-    BOOLEAN_FALSE   shift and go to state 60
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    LPAREN          shift and go to state 129
+    STRING          shift and go to state 55
+    NUMBER          shift and go to state 56
+    FLOAT           shift and go to state 57
+    BOOLEAN_TRUE    shift and go to state 58
+    BOOLEAN_FALSE   shift and go to state 59
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    multipleObjects                shift and go to state 127
-    value                          shift and go to state 54
-    sequential_colls               shift and go to state 55
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    multipleObjects                shift and go to state 128
+    value                          shift and go to state 53
+    sequential_colls               shift and go to state 54
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
 state 88
 
@@ -1507,247 +1568,276 @@ state 88
     (46) setFunctions_intersection -> SET DIVIDE . INTERSECTION set set
     (45) setFunctions_difference -> SET DIVIDE . DIFFERENCE set set
 
-    UNION           shift and go to state 128
-    INTERSECTION    shift and go to state 129
-    DIFFERENCE      shift and go to state 130
+    UNION           shift and go to state 130
+    INTERSECTION    shift and go to state 131
+    DIFFERENCE      shift and go to state 132
 
 
 state 89
 
-    (84) if -> IF LPAREN . boolean_operation RPAREN
-    (63) boolean_operation -> . bool_operation
-    (64) boolean_operation -> . compare_operation
-    (66) bool_operation -> . AND bool_expression bool_expression
-    (67) bool_operation -> . OR bool_expression bool_expression
-    (68) bool_operation -> . NOT bool_expression
-    (71) compare_operation -> . GREATERTHAN num_expression num_expression
-    (72) compare_operation -> . LESSTHAN num_expression num_expression
-    (73) compare_operation -> . GREATERTHANEQUALS num_expression num_expression
-    (74) compare_operation -> . LESSTHANEQUALS num_expression num_expression
-    (75) compare_operation -> . EQUAL num_expression num_expression
-    (76) compare_operation -> . NOTEQUAL num_expression num_expression
+    (47) function_take -> TAKE NUMBER . sequential_colls
+    (38) sequential_colls -> . vector
+    (39) sequential_colls -> . set
+    (40) sequential_colls -> . list
+    (41) sequential_colls -> . ID
+    (31) vector -> . LBRACKET multipleObjects RBRACKET
+    (32) vector -> . LPAREN VECTOR multipleObjects RPAREN
+    (42) set -> . SETDEF LCURLYBRA multipleObjects RCURLYBRA
+    (43) set -> . LPAREN SET multipleObjects RPAREN
+    (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
+    (37) list -> . LPAREN LIST multipleObjects RPAREN
 
-    AND             shift and go to state 39
-    OR              shift and go to state 40
-    NOT             shift and go to state 41
-    GREATERTHAN     shift and go to state 42
-    LESSTHAN        shift and go to state 43
-    GREATERTHANEQUALS shift and go to state 44
-    LESSTHANEQUALS  shift and go to state 45
-    EQUAL           shift and go to state 46
-    NOTEQUAL        shift and go to state 47
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    boolean_operation              shift and go to state 131
-    bool_operation                 shift and go to state 33
-    compare_operation              shift and go to state 34
+    sequential_colls               shift and go to state 133
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
 state 90
 
-    (80) for -> FOR LBRACKET . ID sequential_colls RBRACKET
-    (81) for -> FOR LBRACKET . ID ID RBRACKET
+    (48) function_drop -> DROP NUMBER . sequential_colls
+    (38) sequential_colls -> . vector
+    (39) sequential_colls -> . set
+    (40) sequential_colls -> . list
+    (41) sequential_colls -> . ID
+    (31) vector -> . LBRACKET multipleObjects RBRACKET
+    (32) vector -> . LPAREN VECTOR multipleObjects RPAREN
+    (42) set -> . SETDEF LCURLYBRA multipleObjects RCURLYBRA
+    (43) set -> . LPAREN SET multipleObjects RPAREN
+    (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
+    (37) list -> . LPAREN LIST multipleObjects RPAREN
 
-    ID              shift and go to state 132
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
+    sequential_colls               shift and go to state 134
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
 state 91
 
-    (66) bool_operation -> AND bool_expression . bool_expression
-    (65) bool_expression -> . LPAREN bool_operation RPAREN
-    (69) bool_expression -> . BOOLEAN_TRUE
-    (70) bool_expression -> . BOOLEAN_FALSE
+    (87) if -> IF LPAREN . boolean_operation RPAREN
+    (64) boolean_operation -> . bool_operation
+    (65) boolean_operation -> . compare_operation
+    (67) bool_operation -> . AND bool_expression bool_expression
+    (68) bool_operation -> . OR bool_expression bool_expression
+    (69) bool_operation -> . NOT bool_expression
+    (73) compare_operation -> . GREATERTHAN num_expression num_expression
+    (74) compare_operation -> . LESSTHAN num_expression num_expression
+    (75) compare_operation -> . GREATERTHANEQUALS num_expression num_expression
+    (76) compare_operation -> . LESSTHANEQUALS num_expression num_expression
+    (77) compare_operation -> . EQUAL num_expression num_expression
+    (78) compare_operation -> . NOTEQUAL num_expression num_expression
 
-    LPAREN          shift and go to state 92
-    BOOLEAN_TRUE    shift and go to state 93
-    BOOLEAN_FALSE   shift and go to state 94
+    AND             shift and go to state 40
+    OR              shift and go to state 41
+    NOT             shift and go to state 42
+    GREATERTHAN     shift and go to state 43
+    LESSTHAN        shift and go to state 44
+    GREATERTHANEQUALS shift and go to state 45
+    LESSTHANEQUALS  shift and go to state 46
+    EQUAL           shift and go to state 47
+    NOTEQUAL        shift and go to state 48
 
-    bool_expression                shift and go to state 133
+    boolean_operation              shift and go to state 135
+    bool_operation                 shift and go to state 32
+    compare_operation              shift and go to state 33
 
 state 92
 
-    (65) bool_expression -> LPAREN . bool_operation RPAREN
-    (66) bool_operation -> . AND bool_expression bool_expression
-    (67) bool_operation -> . OR bool_expression bool_expression
-    (68) bool_operation -> . NOT bool_expression
+    (83) for -> FOR LBRACKET . ID sequential_colls RBRACKET
+    (84) for -> FOR LBRACKET . ID ID RBRACKET
 
-    AND             shift and go to state 39
-    OR              shift and go to state 40
-    NOT             shift and go to state 41
+    ID              shift and go to state 136
 
-    bool_operation                 shift and go to state 134
 
 state 93
 
-    (69) bool_expression -> BOOLEAN_TRUE .
+    (67) bool_operation -> AND bool_expression . bool_expression
+    (66) bool_expression -> . LPAREN bool_operation RPAREN
+    (70) bool_expression -> . BOOLEAN_TRUE
+    (71) bool_expression -> . BOOLEAN_FALSE
+    (72) bool_expression -> . ID
 
-    LPAREN          reduce using rule 69 (bool_expression -> BOOLEAN_TRUE .)
-    BOOLEAN_TRUE    reduce using rule 69 (bool_expression -> BOOLEAN_TRUE .)
-    BOOLEAN_FALSE   reduce using rule 69 (bool_expression -> BOOLEAN_TRUE .)
-    RPAREN          reduce using rule 69 (bool_expression -> BOOLEAN_TRUE .)
+    LPAREN          shift and go to state 94
+    BOOLEAN_TRUE    shift and go to state 95
+    BOOLEAN_FALSE   shift and go to state 96
+    ID              shift and go to state 97
 
+    bool_expression                shift and go to state 137
 
 state 94
 
-    (70) bool_expression -> BOOLEAN_FALSE .
+    (66) bool_expression -> LPAREN . bool_operation RPAREN
+    (67) bool_operation -> . AND bool_expression bool_expression
+    (68) bool_operation -> . OR bool_expression bool_expression
+    (69) bool_operation -> . NOT bool_expression
 
-    LPAREN          reduce using rule 70 (bool_expression -> BOOLEAN_FALSE .)
-    BOOLEAN_TRUE    reduce using rule 70 (bool_expression -> BOOLEAN_FALSE .)
-    BOOLEAN_FALSE   reduce using rule 70 (bool_expression -> BOOLEAN_FALSE .)
-    RPAREN          reduce using rule 70 (bool_expression -> BOOLEAN_FALSE .)
+    AND             shift and go to state 40
+    OR              shift and go to state 41
+    NOT             shift and go to state 42
 
+    bool_operation                 shift and go to state 138
 
 state 95
 
-    (67) bool_operation -> OR bool_expression . bool_expression
-    (65) bool_expression -> . LPAREN bool_operation RPAREN
-    (69) bool_expression -> . BOOLEAN_TRUE
-    (70) bool_expression -> . BOOLEAN_FALSE
+    (70) bool_expression -> BOOLEAN_TRUE .
 
-    LPAREN          shift and go to state 92
-    BOOLEAN_TRUE    shift and go to state 93
-    BOOLEAN_FALSE   shift and go to state 94
+    LPAREN          reduce using rule 70 (bool_expression -> BOOLEAN_TRUE .)
+    BOOLEAN_TRUE    reduce using rule 70 (bool_expression -> BOOLEAN_TRUE .)
+    BOOLEAN_FALSE   reduce using rule 70 (bool_expression -> BOOLEAN_TRUE .)
+    ID              reduce using rule 70 (bool_expression -> BOOLEAN_TRUE .)
+    RPAREN          reduce using rule 70 (bool_expression -> BOOLEAN_TRUE .)
 
-    bool_expression                shift and go to state 135
 
 state 96
 
-    (68) bool_operation -> NOT bool_expression .
+    (71) bool_expression -> BOOLEAN_FALSE .
 
-    RPAREN          reduce using rule 68 (bool_operation -> NOT bool_expression .)
+    LPAREN          reduce using rule 71 (bool_expression -> BOOLEAN_FALSE .)
+    BOOLEAN_TRUE    reduce using rule 71 (bool_expression -> BOOLEAN_FALSE .)
+    BOOLEAN_FALSE   reduce using rule 71 (bool_expression -> BOOLEAN_FALSE .)
+    ID              reduce using rule 71 (bool_expression -> BOOLEAN_FALSE .)
+    RPAREN          reduce using rule 71 (bool_expression -> BOOLEAN_FALSE .)
 
 
 state 97
 
-    (71) compare_operation -> GREATERTHAN num_expression . num_expression
-    (57) num_expression -> . LPAREN math_operation RPAREN
-    (62) num_expression -> . NUMBER
+    (72) bool_expression -> ID .
 
-    LPAREN          shift and go to state 83
-    NUMBER          shift and go to state 82
+    LPAREN          reduce using rule 72 (bool_expression -> ID .)
+    BOOLEAN_TRUE    reduce using rule 72 (bool_expression -> ID .)
+    BOOLEAN_FALSE   reduce using rule 72 (bool_expression -> ID .)
+    ID              reduce using rule 72 (bool_expression -> ID .)
+    RPAREN          reduce using rule 72 (bool_expression -> ID .)
 
-    num_expression                 shift and go to state 136
 
 state 98
 
-    (72) compare_operation -> LESSTHAN num_expression . num_expression
-    (57) num_expression -> . LPAREN math_operation RPAREN
-    (62) num_expression -> . NUMBER
+    (68) bool_operation -> OR bool_expression . bool_expression
+    (66) bool_expression -> . LPAREN bool_operation RPAREN
+    (70) bool_expression -> . BOOLEAN_TRUE
+    (71) bool_expression -> . BOOLEAN_FALSE
+    (72) bool_expression -> . ID
 
-    LPAREN          shift and go to state 83
-    NUMBER          shift and go to state 82
+    LPAREN          shift and go to state 94
+    BOOLEAN_TRUE    shift and go to state 95
+    BOOLEAN_FALSE   shift and go to state 96
+    ID              shift and go to state 97
 
-    num_expression                 shift and go to state 137
+    bool_expression                shift and go to state 139
 
 state 99
 
-    (73) compare_operation -> GREATERTHANEQUALS num_expression . num_expression
-    (57) num_expression -> . LPAREN math_operation RPAREN
-    (62) num_expression -> . NUMBER
+    (69) bool_operation -> NOT bool_expression .
 
-    LPAREN          shift and go to state 83
-    NUMBER          shift and go to state 82
+    RPAREN          reduce using rule 69 (bool_operation -> NOT bool_expression .)
 
-    num_expression                 shift and go to state 138
 
 state 100
 
-    (74) compare_operation -> LESSTHANEQUALS num_expression . num_expression
+    (73) compare_operation -> GREATERTHAN num_expression . num_expression
     (57) num_expression -> . LPAREN math_operation RPAREN
     (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    LPAREN          shift and go to state 83
+    LPAREN          shift and go to state 81
     NUMBER          shift and go to state 82
-
-    num_expression                 shift and go to state 139
-
-state 101
-
-    (75) compare_operation -> EQUAL num_expression . num_expression
-    (57) num_expression -> . LPAREN math_operation RPAREN
-    (62) num_expression -> . NUMBER
-
-    LPAREN          shift and go to state 83
-    NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
     num_expression                 shift and go to state 140
 
-state 102
+state 101
 
-    (76) compare_operation -> NOTEQUAL num_expression . num_expression
+    (74) compare_operation -> LESSTHAN num_expression . num_expression
     (57) num_expression -> . LPAREN math_operation RPAREN
     (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    LPAREN          shift and go to state 83
+    LPAREN          shift and go to state 81
     NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
     num_expression                 shift and go to state 141
 
+state 102
+
+    (75) compare_operation -> GREATERTHANEQUALS num_expression . num_expression
+    (57) num_expression -> . LPAREN math_operation RPAREN
+    (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
+
+    LPAREN          shift and go to state 81
+    NUMBER          shift and go to state 82
+    ID              shift and go to state 83
+
+    num_expression                 shift and go to state 142
+
 state 103
 
-    (47) function_take -> LPAREN TAKE NUMBER . sequential_colls
-    (38) sequential_colls -> . vector
-    (39) sequential_colls -> . set
-    (40) sequential_colls -> . list
-    (41) sequential_colls -> . ID
-    (31) vector -> . LBRACKET multipleObjects RBRACKET
-    (32) vector -> . LPAREN VECTOR multipleObjects RPAREN
-    (42) set -> . SETDEF LCURLYBRA multipleObjects RCURLYBRA
-    (43) set -> . LPAREN SET multipleObjects RPAREN
-    (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
-    (37) list -> . LPAREN LIST multipleObjects RPAREN
+    (76) compare_operation -> LESSTHANEQUALS num_expression . num_expression
+    (57) num_expression -> . LPAREN math_operation RPAREN
+    (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    LPAREN          shift and go to state 81
+    NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
-    sequential_colls               shift and go to state 142
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    num_expression                 shift and go to state 143
 
 state 104
 
-    (48) function_drop -> LPAREN DROP NUMBER . sequential_colls
-    (38) sequential_colls -> . vector
-    (39) sequential_colls -> . set
-    (40) sequential_colls -> . list
-    (41) sequential_colls -> . ID
-    (31) vector -> . LBRACKET multipleObjects RBRACKET
-    (32) vector -> . LPAREN VECTOR multipleObjects RPAREN
-    (42) set -> . SETDEF LCURLYBRA multipleObjects RCURLYBRA
-    (43) set -> . LPAREN SET multipleObjects RPAREN
-    (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
-    (37) list -> . LPAREN LIST multipleObjects RPAREN
+    (77) compare_operation -> EQUAL num_expression . num_expression
+    (57) num_expression -> . LPAREN math_operation RPAREN
+    (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
 
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    LPAREN          shift and go to state 81
+    NUMBER          shift and go to state 82
+    ID              shift and go to state 83
 
-    sequential_colls               shift and go to state 143
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    num_expression                 shift and go to state 144
 
 state 105
+
+    (78) compare_operation -> NOTEQUAL num_expression . num_expression
+    (57) num_expression -> . LPAREN math_operation RPAREN
+    (62) num_expression -> . NUMBER
+    (63) num_expression -> . ID
+
+    LPAREN          shift and go to state 81
+    NUMBER          shift and go to state 82
+    ID              shift and go to state 83
+
+    num_expression                 shift and go to state 145
+
+state 106
 
     (6) code_block -> LPAREN function . RPAREN
     (8) code_block -> LPAREN function . RPAREN code_block
 
-    RPAREN          shift and go to state 144
+    RPAREN          shift and go to state 146
 
 
-state 106
+state 107
 
     (7) code_block -> LPAREN general_expression . RPAREN
     (9) code_block -> LPAREN general_expression . RPAREN code_block
 
-    RPAREN          shift and go to state 145
+    RPAREN          shift and go to state 147
 
 
-state 107
+state 108
 
     (23) multipleObjects -> value multipleObjects .
 
@@ -1756,7 +1846,7 @@ state 107
     RCURLYBRA       reduce using rule 23 (multipleObjects -> value multipleObjects .)
 
 
-state 108
+state 109
 
     (25) multipleObjects -> sequential_colls multipleObjects .
 
@@ -1765,14 +1855,14 @@ state 108
     RCURLYBRA       reduce using rule 25 (multipleObjects -> sequential_colls multipleObjects .)
 
 
-state 109
+state 110
 
     (31) vector -> LBRACKET multipleObjects . RBRACKET
 
-    RBRACKET        shift and go to state 146
+    RBRACKET        shift and go to state 148
 
 
-state 110
+state 111
 
     (32) vector -> LPAREN VECTOR . multipleObjects RPAREN
     (22) multipleObjects -> . value
@@ -1795,25 +1885,25 @@ state 110
     (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
     (37) list -> . LPAREN LIST multipleObjects RPAREN
 
-    STRING          shift and go to state 56
-    NUMBER          shift and go to state 57
-    FLOAT           shift and go to state 58
-    BOOLEAN_TRUE    shift and go to state 59
-    BOOLEAN_FALSE   shift and go to state 60
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    STRING          shift and go to state 55
+    NUMBER          shift and go to state 56
+    FLOAT           shift and go to state 57
+    BOOLEAN_TRUE    shift and go to state 58
+    BOOLEAN_FALSE   shift and go to state 59
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    multipleObjects                shift and go to state 147
-    value                          shift and go to state 54
-    sequential_colls               shift and go to state 55
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    multipleObjects                shift and go to state 149
+    value                          shift and go to state 53
+    sequential_colls               shift and go to state 54
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
-state 111
+state 112
 
     (43) set -> LPAREN SET . multipleObjects RPAREN
     (22) multipleObjects -> . value
@@ -1836,25 +1926,25 @@ state 111
     (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
     (37) list -> . LPAREN LIST multipleObjects RPAREN
 
-    STRING          shift and go to state 56
-    NUMBER          shift and go to state 57
-    FLOAT           shift and go to state 58
-    BOOLEAN_TRUE    shift and go to state 59
-    BOOLEAN_FALSE   shift and go to state 60
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    STRING          shift and go to state 55
+    NUMBER          shift and go to state 56
+    FLOAT           shift and go to state 57
+    BOOLEAN_TRUE    shift and go to state 58
+    BOOLEAN_FALSE   shift and go to state 59
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    multipleObjects                shift and go to state 148
-    value                          shift and go to state 54
-    sequential_colls               shift and go to state 55
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    multipleObjects                shift and go to state 150
+    value                          shift and go to state 53
+    sequential_colls               shift and go to state 54
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
-state 112
+state 113
 
     (37) list -> LPAREN LIST . multipleObjects RPAREN
     (22) multipleObjects -> . value
@@ -1877,25 +1967,25 @@ state 112
     (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
     (37) list -> . LPAREN LIST multipleObjects RPAREN
 
-    STRING          shift and go to state 56
-    NUMBER          shift and go to state 57
-    FLOAT           shift and go to state 58
-    BOOLEAN_TRUE    shift and go to state 59
-    BOOLEAN_FALSE   shift and go to state 60
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    STRING          shift and go to state 55
+    NUMBER          shift and go to state 56
+    FLOAT           shift and go to state 57
+    BOOLEAN_TRUE    shift and go to state 58
+    BOOLEAN_FALSE   shift and go to state 59
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    multipleObjects                shift and go to state 149
-    value                          shift and go to state 54
-    sequential_colls               shift and go to state 55
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    multipleObjects                shift and go to state 151
+    value                          shift and go to state 53
+    sequential_colls               shift and go to state 54
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
-state 113
+state 114
 
     (42) set -> SETDEF LCURLYBRA . multipleObjects RCURLYBRA
     (22) multipleObjects -> . value
@@ -1918,25 +2008,25 @@ state 113
     (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
     (37) list -> . LPAREN LIST multipleObjects RPAREN
 
-    STRING          shift and go to state 56
-    NUMBER          shift and go to state 57
-    FLOAT           shift and go to state 58
-    BOOLEAN_TRUE    shift and go to state 59
-    BOOLEAN_FALSE   shift and go to state 60
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    STRING          shift and go to state 55
+    NUMBER          shift and go to state 56
+    FLOAT           shift and go to state 57
+    BOOLEAN_TRUE    shift and go to state 58
+    BOOLEAN_FALSE   shift and go to state 59
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    multipleObjects                shift and go to state 150
-    value                          shift and go to state 54
-    sequential_colls               shift and go to state 55
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    multipleObjects                shift and go to state 152
+    value                          shift and go to state 53
+    sequential_colls               shift and go to state 54
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
-state 114
+state 115
 
     (36) list -> APOSTROPHE LPAREN . multipleObjects RPAREN
     (22) multipleObjects -> . value
@@ -1959,159 +2049,242 @@ state 114
     (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
     (37) list -> . LPAREN LIST multipleObjects RPAREN
 
-    STRING          shift and go to state 56
-    NUMBER          shift and go to state 57
-    FLOAT           shift and go to state 58
-    BOOLEAN_TRUE    shift and go to state 59
-    BOOLEAN_FALSE   shift and go to state 60
-    ID              shift and go to state 64
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    STRING          shift and go to state 55
+    NUMBER          shift and go to state 56
+    FLOAT           shift and go to state 57
+    BOOLEAN_TRUE    shift and go to state 58
+    BOOLEAN_FALSE   shift and go to state 59
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    multipleObjects                shift and go to state 151
-    value                          shift and go to state 54
-    sequential_colls               shift and go to state 55
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
+    multipleObjects                shift and go to state 153
+    value                          shift and go to state 53
+    sequential_colls               shift and go to state 54
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
-state 115
+state 116
 
     (14) multiplestring -> STRING multiplestring .
 
     RPAREN          reduce using rule 14 (multiplestring -> STRING multiplestring .)
 
 
-state 116
+state 117
 
     (16) multiplestring -> stament multiplestring .
 
     RPAREN          reduce using rule 16 (multiplestring -> stament multiplestring .)
 
 
-state 117
+state 118
 
     (18) function -> FUNCTION_SUB STRING NUMBER .
 
     RPAREN          reduce using rule 18 (function -> FUNCTION_SUB STRING NUMBER .)
 
 
-state 118
+state 119
 
     (19) function -> FUNCTION_SUB ID NUMBER .
 
     RPAREN          reduce using rule 19 (function -> FUNCTION_SUB ID NUMBER .)
 
 
-state 119
+state 120
 
     (33) function -> FUNCTION_GET sequential_colls NUMBER .
 
     RPAREN          reduce using rule 33 (function -> FUNCTION_GET sequential_colls NUMBER .)
 
 
-state 120
+state 121
 
     (35) function -> FUNCTION_CONJ sequential_colls multipleObjects .
 
     RPAREN          reduce using rule 35 (function -> FUNCTION_CONJ sequential_colls multipleObjects .)
 
 
-state 121
-
-    (82) while -> WHILE LPAREN boolean_operation . RPAREN do
-
-    RPAREN          shift and go to state 152
-
-
 state 122
 
-    (58) math_operation -> PLUS num_expression NUMBER .
+    (85) while -> WHILE LPAREN boolean_operation . RPAREN do
 
-    RPAREN          reduce using rule 58 (math_operation -> PLUS num_expression NUMBER .)
+    RPAREN          shift and go to state 154
 
 
 state 123
 
-    (57) num_expression -> LPAREN math_operation . RPAREN
+    (58) math_operation -> PLUS num_expression num_expression .
 
-    RPAREN          shift and go to state 153
+    RPAREN          reduce using rule 58 (math_operation -> PLUS num_expression num_expression .)
 
 
 state 124
 
-    (59) math_operation -> MINUS num_expression NUMBER .
+    (57) num_expression -> LPAREN math_operation . RPAREN
 
-    RPAREN          reduce using rule 59 (math_operation -> MINUS num_expression NUMBER .)
+    RPAREN          shift and go to state 155
 
 
 state 125
 
-    (60) math_operation -> DIVIDE num_expression NUMBER .
+    (59) math_operation -> MINUS num_expression num_expression .
 
-    RPAREN          reduce using rule 60 (math_operation -> DIVIDE num_expression NUMBER .)
+    RPAREN          reduce using rule 59 (math_operation -> MINUS num_expression num_expression .)
 
 
 state 126
 
-    (61) math_operation -> TIMES num_expression NUMBER .
+    (60) math_operation -> DIVIDE num_expression num_expression .
 
-    RPAREN          reduce using rule 61 (math_operation -> TIMES num_expression NUMBER .)
+    RPAREN          reduce using rule 60 (math_operation -> DIVIDE num_expression num_expression .)
 
 
 state 127
 
-    (77) variable_expression -> DEF ID multipleObjects .
+    (61) math_operation -> TIMES num_expression num_expression .
 
-    RPAREN          reduce using rule 77 (variable_expression -> DEF ID multipleObjects .)
+    RPAREN          reduce using rule 61 (math_operation -> TIMES num_expression num_expression .)
 
 
 state 128
+
+    (79) variable_expression -> DEF ID multipleObjects .
+
+    RPAREN          reduce using rule 79 (variable_expression -> DEF ID multipleObjects .)
+
+
+state 129
+
+    (80) variable_expression -> DEF ID LPAREN . general_expression RPAREN
+    (32) vector -> LPAREN . VECTOR multipleObjects RPAREN
+    (43) set -> LPAREN . SET multipleObjects RPAREN
+    (37) list -> LPAREN . LIST multipleObjects RPAREN
+    (49) general_expression -> . math_operation
+    (50) general_expression -> . boolean_operation
+    (51) general_expression -> . variable_expression
+    (52) general_expression -> . setFunctions_union
+    (53) general_expression -> . setFunctions_intersection
+    (54) general_expression -> . setFunctions_difference
+    (55) general_expression -> . function_take
+    (56) general_expression -> . function_drop
+    (58) math_operation -> . PLUS num_expression num_expression
+    (59) math_operation -> . MINUS num_expression num_expression
+    (60) math_operation -> . DIVIDE num_expression num_expression
+    (61) math_operation -> . TIMES num_expression num_expression
+    (64) boolean_operation -> . bool_operation
+    (65) boolean_operation -> . compare_operation
+    (79) variable_expression -> . DEF ID multipleObjects
+    (80) variable_expression -> . DEF ID LPAREN general_expression RPAREN
+    (44) setFunctions_union -> . SET DIVIDE UNION set set
+    (46) setFunctions_intersection -> . SET DIVIDE INTERSECTION set set
+    (45) setFunctions_difference -> . SET DIVIDE DIFFERENCE set set
+    (47) function_take -> . TAKE NUMBER sequential_colls
+    (48) function_drop -> . DROP NUMBER sequential_colls
+    (67) bool_operation -> . AND bool_expression bool_expression
+    (68) bool_operation -> . OR bool_expression bool_expression
+    (69) bool_operation -> . NOT bool_expression
+    (73) compare_operation -> . GREATERTHAN num_expression num_expression
+    (74) compare_operation -> . LESSTHAN num_expression num_expression
+    (75) compare_operation -> . GREATERTHANEQUALS num_expression num_expression
+    (76) compare_operation -> . LESSTHANEQUALS num_expression num_expression
+    (77) compare_operation -> . EQUAL num_expression num_expression
+    (78) compare_operation -> . NOTEQUAL num_expression num_expression
+
+    VECTOR          shift and go to state 111
+    SET             shift and go to state 157
+    LIST            shift and go to state 113
+    PLUS            shift and go to state 28
+    MINUS           shift and go to state 29
+    DIVIDE          shift and go to state 30
+    TIMES           shift and go to state 31
+    DEF             shift and go to state 34
+    TAKE            shift and go to state 36
+    DROP            shift and go to state 37
+    AND             shift and go to state 40
+    OR              shift and go to state 41
+    NOT             shift and go to state 42
+    GREATERTHAN     shift and go to state 43
+    LESSTHAN        shift and go to state 44
+    GREATERTHANEQUALS shift and go to state 45
+    LESSTHANEQUALS  shift and go to state 46
+    EQUAL           shift and go to state 47
+    NOTEQUAL        shift and go to state 48
+
+    general_expression             shift and go to state 156
+    math_operation                 shift and go to state 17
+    boolean_operation              shift and go to state 18
+    variable_expression            shift and go to state 19
+    setFunctions_union             shift and go to state 20
+    setFunctions_intersection      shift and go to state 21
+    setFunctions_difference        shift and go to state 22
+    function_take                  shift and go to state 23
+    function_drop                  shift and go to state 24
+    bool_operation                 shift and go to state 32
+    compare_operation              shift and go to state 33
+
+state 130
 
     (44) setFunctions_union -> SET DIVIDE UNION . set set
     (42) set -> . SETDEF LCURLYBRA multipleObjects RCURLYBRA
     (43) set -> . LPAREN SET multipleObjects RPAREN
 
-    SETDEF          shift and go to state 67
-    LPAREN          shift and go to state 155
+    SETDEF          shift and go to state 66
+    LPAREN          shift and go to state 159
 
-    set                            shift and go to state 154
+    set                            shift and go to state 158
 
-state 129
+state 131
 
     (46) setFunctions_intersection -> SET DIVIDE INTERSECTION . set set
     (42) set -> . SETDEF LCURLYBRA multipleObjects RCURLYBRA
     (43) set -> . LPAREN SET multipleObjects RPAREN
 
-    SETDEF          shift and go to state 67
-    LPAREN          shift and go to state 155
+    SETDEF          shift and go to state 66
+    LPAREN          shift and go to state 159
 
-    set                            shift and go to state 156
+    set                            shift and go to state 160
 
-state 130
+state 132
 
     (45) setFunctions_difference -> SET DIVIDE DIFFERENCE . set set
     (42) set -> . SETDEF LCURLYBRA multipleObjects RCURLYBRA
     (43) set -> . LPAREN SET multipleObjects RPAREN
 
-    SETDEF          shift and go to state 67
-    LPAREN          shift and go to state 155
+    SETDEF          shift and go to state 66
+    LPAREN          shift and go to state 159
 
-    set                            shift and go to state 157
+    set                            shift and go to state 161
 
-state 131
+state 133
 
-    (84) if -> IF LPAREN boolean_operation . RPAREN
+    (47) function_take -> TAKE NUMBER sequential_colls .
 
-    RPAREN          shift and go to state 158
+    RPAREN          reduce using rule 47 (function_take -> TAKE NUMBER sequential_colls .)
 
 
-state 132
+state 134
 
-    (80) for -> FOR LBRACKET ID . sequential_colls RBRACKET
-    (81) for -> FOR LBRACKET ID . ID RBRACKET
+    (48) function_drop -> DROP NUMBER sequential_colls .
+
+    RPAREN          reduce using rule 48 (function_drop -> DROP NUMBER sequential_colls .)
+
+
+state 135
+
+    (87) if -> IF LPAREN boolean_operation . RPAREN
+
+    RPAREN          shift and go to state 162
+
+
+state 136
+
+    (83) for -> FOR LBRACKET ID . sequential_colls RBRACKET
+    (84) for -> FOR LBRACKET ID . ID RBRACKET
     (38) sequential_colls -> . vector
     (39) sequential_colls -> . set
     (40) sequential_colls -> . list
@@ -2123,95 +2296,81 @@ state 132
     (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
     (37) list -> . LPAREN LIST multipleObjects RPAREN
 
-    ID              shift and go to state 159
-    LBRACKET        shift and go to state 65
-    LPAREN          shift and go to state 66
-    SETDEF          shift and go to state 67
-    APOSTROPHE      shift and go to state 68
+    ID              shift and go to state 163
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
 
-    sequential_colls               shift and go to state 160
-    vector                         shift and go to state 61
-    set                            shift and go to state 62
-    list                           shift and go to state 63
-
-state 133
-
-    (66) bool_operation -> AND bool_expression bool_expression .
-
-    RPAREN          reduce using rule 66 (bool_operation -> AND bool_expression bool_expression .)
-
-
-state 134
-
-    (65) bool_expression -> LPAREN bool_operation . RPAREN
-
-    RPAREN          shift and go to state 161
-
-
-state 135
-
-    (67) bool_operation -> OR bool_expression bool_expression .
-
-    RPAREN          reduce using rule 67 (bool_operation -> OR bool_expression bool_expression .)
-
-
-state 136
-
-    (71) compare_operation -> GREATERTHAN num_expression num_expression .
-
-    RPAREN          reduce using rule 71 (compare_operation -> GREATERTHAN num_expression num_expression .)
-
+    sequential_colls               shift and go to state 164
+    vector                         shift and go to state 60
+    set                            shift and go to state 61
+    list                           shift and go to state 62
 
 state 137
 
-    (72) compare_operation -> LESSTHAN num_expression num_expression .
+    (67) bool_operation -> AND bool_expression bool_expression .
 
-    RPAREN          reduce using rule 72 (compare_operation -> LESSTHAN num_expression num_expression .)
+    RPAREN          reduce using rule 67 (bool_operation -> AND bool_expression bool_expression .)
 
 
 state 138
 
-    (73) compare_operation -> GREATERTHANEQUALS num_expression num_expression .
+    (66) bool_expression -> LPAREN bool_operation . RPAREN
 
-    RPAREN          reduce using rule 73 (compare_operation -> GREATERTHANEQUALS num_expression num_expression .)
+    RPAREN          shift and go to state 165
 
 
 state 139
 
-    (74) compare_operation -> LESSTHANEQUALS num_expression num_expression .
+    (68) bool_operation -> OR bool_expression bool_expression .
 
-    RPAREN          reduce using rule 74 (compare_operation -> LESSTHANEQUALS num_expression num_expression .)
+    RPAREN          reduce using rule 68 (bool_operation -> OR bool_expression bool_expression .)
 
 
 state 140
 
-    (75) compare_operation -> EQUAL num_expression num_expression .
+    (73) compare_operation -> GREATERTHAN num_expression num_expression .
 
-    RPAREN          reduce using rule 75 (compare_operation -> EQUAL num_expression num_expression .)
+    RPAREN          reduce using rule 73 (compare_operation -> GREATERTHAN num_expression num_expression .)
 
 
 state 141
 
-    (76) compare_operation -> NOTEQUAL num_expression num_expression .
+    (74) compare_operation -> LESSTHAN num_expression num_expression .
 
-    RPAREN          reduce using rule 76 (compare_operation -> NOTEQUAL num_expression num_expression .)
+    RPAREN          reduce using rule 74 (compare_operation -> LESSTHAN num_expression num_expression .)
 
 
 state 142
 
-    (47) function_take -> LPAREN TAKE NUMBER sequential_colls .
+    (75) compare_operation -> GREATERTHANEQUALS num_expression num_expression .
 
-    RPAREN          reduce using rule 47 (function_take -> LPAREN TAKE NUMBER sequential_colls .)
+    RPAREN          reduce using rule 75 (compare_operation -> GREATERTHANEQUALS num_expression num_expression .)
 
 
 state 143
 
-    (48) function_drop -> LPAREN DROP NUMBER sequential_colls .
+    (76) compare_operation -> LESSTHANEQUALS num_expression num_expression .
 
-    RPAREN          reduce using rule 48 (function_drop -> LPAREN DROP NUMBER sequential_colls .)
+    RPAREN          reduce using rule 76 (compare_operation -> LESSTHANEQUALS num_expression num_expression .)
 
 
 state 144
+
+    (77) compare_operation -> EQUAL num_expression num_expression .
+
+    RPAREN          reduce using rule 77 (compare_operation -> EQUAL num_expression num_expression .)
+
+
+state 145
+
+    (78) compare_operation -> NOTEQUAL num_expression num_expression .
+
+    RPAREN          reduce using rule 78 (compare_operation -> NOTEQUAL num_expression num_expression .)
+
+
+state 146
 
     (6) code_block -> LPAREN function RPAREN .
     (8) code_block -> LPAREN function RPAREN . code_block
@@ -2221,11 +2380,11 @@ state 144
     (9) code_block -> . LPAREN general_expression RPAREN code_block
 
     RPAREN          reduce using rule 6 (code_block -> LPAREN function RPAREN .)
-    LPAREN          shift and go to state 52
+    LPAREN          shift and go to state 51
 
-    code_block                     shift and go to state 162
+    code_block                     shift and go to state 166
 
-state 145
+state 147
 
     (7) code_block -> LPAREN general_expression RPAREN .
     (9) code_block -> LPAREN general_expression RPAREN . code_block
@@ -2235,11 +2394,11 @@ state 145
     (9) code_block -> . LPAREN general_expression RPAREN code_block
 
     RPAREN          reduce using rule 7 (code_block -> LPAREN general_expression RPAREN .)
-    LPAREN          shift and go to state 52
+    LPAREN          shift and go to state 51
 
-    code_block                     shift and go to state 163
+    code_block                     shift and go to state 167
 
-state 146
+state 148
 
     (31) vector -> LBRACKET multipleObjects RBRACKET .
 
@@ -2258,149 +2417,203 @@ state 146
     RCURLYBRA       reduce using rule 31 (vector -> LBRACKET multipleObjects RBRACKET .)
 
 
-state 147
-
-    (32) vector -> LPAREN VECTOR multipleObjects . RPAREN
-
-    RPAREN          shift and go to state 164
-
-
-state 148
-
-    (43) set -> LPAREN SET multipleObjects . RPAREN
-
-    RPAREN          shift and go to state 165
-
-
 state 149
 
-    (37) list -> LPAREN LIST multipleObjects . RPAREN
-
-    RPAREN          shift and go to state 166
-
-
-state 150
-
-    (42) set -> SETDEF LCURLYBRA multipleObjects . RCURLYBRA
-
-    RCURLYBRA       shift and go to state 167
-
-
-state 151
-
-    (36) list -> APOSTROPHE LPAREN multipleObjects . RPAREN
+    (32) vector -> LPAREN VECTOR multipleObjects . RPAREN
 
     RPAREN          shift and go to state 168
 
 
+state 150
+
+    (43) set -> LPAREN SET multipleObjects . RPAREN
+
+    RPAREN          shift and go to state 169
+
+
+state 151
+
+    (37) list -> LPAREN LIST multipleObjects . RPAREN
+
+    RPAREN          shift and go to state 170
+
+
 state 152
 
-    (82) while -> WHILE LPAREN boolean_operation RPAREN . do
-    (83) do -> . LPAREN DO code_block RPAREN
+    (42) set -> SETDEF LCURLYBRA multipleObjects . RCURLYBRA
 
-    LPAREN          shift and go to state 169
+    RCURLYBRA       shift and go to state 171
 
-    do                             shift and go to state 170
 
 state 153
 
-    (57) num_expression -> LPAREN math_operation RPAREN .
+    (36) list -> APOSTROPHE LPAREN multipleObjects . RPAREN
 
-    NUMBER          reduce using rule 57 (num_expression -> LPAREN math_operation RPAREN .)
-    LPAREN          reduce using rule 57 (num_expression -> LPAREN math_operation RPAREN .)
-    RPAREN          reduce using rule 57 (num_expression -> LPAREN math_operation RPAREN .)
+    RPAREN          shift and go to state 172
 
 
 state 154
+
+    (85) while -> WHILE LPAREN boolean_operation RPAREN . do
+    (86) do -> . LPAREN DO code_block RPAREN
+
+    LPAREN          shift and go to state 173
+
+    do                             shift and go to state 174
+
+state 155
+
+    (57) num_expression -> LPAREN math_operation RPAREN .
+
+    LPAREN          reduce using rule 57 (num_expression -> LPAREN math_operation RPAREN .)
+    NUMBER          reduce using rule 57 (num_expression -> LPAREN math_operation RPAREN .)
+    ID              reduce using rule 57 (num_expression -> LPAREN math_operation RPAREN .)
+    RPAREN          reduce using rule 57 (num_expression -> LPAREN math_operation RPAREN .)
+
+
+state 156
+
+    (80) variable_expression -> DEF ID LPAREN general_expression . RPAREN
+
+    RPAREN          shift and go to state 175
+
+
+state 157
+
+    (43) set -> LPAREN SET . multipleObjects RPAREN
+    (44) setFunctions_union -> SET . DIVIDE UNION set set
+    (46) setFunctions_intersection -> SET . DIVIDE INTERSECTION set set
+    (45) setFunctions_difference -> SET . DIVIDE DIFFERENCE set set
+    (22) multipleObjects -> . value
+    (23) multipleObjects -> . value multipleObjects
+    (24) multipleObjects -> . sequential_colls
+    (25) multipleObjects -> . sequential_colls multipleObjects
+    (26) value -> . STRING
+    (27) value -> . NUMBER
+    (28) value -> . FLOAT
+    (29) value -> . BOOLEAN_TRUE
+    (30) value -> . BOOLEAN_FALSE
+    (38) sequential_colls -> . vector
+    (39) sequential_colls -> . set
+    (40) sequential_colls -> . list
+    (41) sequential_colls -> . ID
+    (31) vector -> . LBRACKET multipleObjects RBRACKET
+    (32) vector -> . LPAREN VECTOR multipleObjects RPAREN
+    (42) set -> . SETDEF LCURLYBRA multipleObjects RCURLYBRA
+    (43) set -> . LPAREN SET multipleObjects RPAREN
+    (36) list -> . APOSTROPHE LPAREN multipleObjects RPAREN
+    (37) list -> . LPAREN LIST multipleObjects RPAREN
+
+    DIVIDE          shift and go to state 88
+    STRING          shift and go to state 55
+    NUMBER          shift and go to state 56
+    FLOAT           shift and go to state 57
+    BOOLEAN_TRUE    shift and go to state 58
+    BOOLEAN_FALSE   shift and go to state 59
+    ID              shift and go to state 63
+    LBRACKET        shift and go to state 64
+    LPAREN          shift and go to state 65
+    SETDEF          shift and go to state 66
+    APOSTROPHE      shift and go to state 67
+
+    multipleObjects                shift and go to state 150
+    set                            shift and go to state 61
+    value                          shift and go to state 53
+    sequential_colls               shift and go to state 54
+    vector                         shift and go to state 60
+    list                           shift and go to state 62
+
+state 158
 
     (44) setFunctions_union -> SET DIVIDE UNION set . set
     (42) set -> . SETDEF LCURLYBRA multipleObjects RCURLYBRA
     (43) set -> . LPAREN SET multipleObjects RPAREN
 
-    SETDEF          shift and go to state 67
-    LPAREN          shift and go to state 155
+    SETDEF          shift and go to state 66
+    LPAREN          shift and go to state 159
 
-    set                            shift and go to state 171
+    set                            shift and go to state 176
 
-state 155
+state 159
 
     (43) set -> LPAREN . SET multipleObjects RPAREN
 
-    SET             shift and go to state 111
+    SET             shift and go to state 112
 
 
-state 156
+state 160
 
     (46) setFunctions_intersection -> SET DIVIDE INTERSECTION set . set
     (42) set -> . SETDEF LCURLYBRA multipleObjects RCURLYBRA
     (43) set -> . LPAREN SET multipleObjects RPAREN
 
-    SETDEF          shift and go to state 67
-    LPAREN          shift and go to state 155
+    SETDEF          shift and go to state 66
+    LPAREN          shift and go to state 159
 
-    set                            shift and go to state 172
+    set                            shift and go to state 177
 
-state 157
+state 161
 
     (45) setFunctions_difference -> SET DIVIDE DIFFERENCE set . set
     (42) set -> . SETDEF LCURLYBRA multipleObjects RCURLYBRA
     (43) set -> . LPAREN SET multipleObjects RPAREN
 
-    SETDEF          shift and go to state 67
-    LPAREN          shift and go to state 155
+    SETDEF          shift and go to state 66
+    LPAREN          shift and go to state 159
 
-    set                            shift and go to state 173
+    set                            shift and go to state 178
 
-state 158
+state 162
 
-    (84) if -> IF LPAREN boolean_operation RPAREN .
+    (87) if -> IF LPAREN boolean_operation RPAREN .
 
-    LPAREN          reduce using rule 84 (if -> IF LPAREN boolean_operation RPAREN .)
+    LPAREN          reduce using rule 87 (if -> IF LPAREN boolean_operation RPAREN .)
 
 
-state 159
+state 163
 
-    (81) for -> FOR LBRACKET ID ID . RBRACKET
+    (84) for -> FOR LBRACKET ID ID . RBRACKET
     (41) sequential_colls -> ID .
 
   ! shift/reduce conflict for RBRACKET resolved as shift
-    RBRACKET        shift and go to state 174
+    RBRACKET        shift and go to state 179
 
   ! RBRACKET        [ reduce using rule 41 (sequential_colls -> ID .) ]
 
 
-state 160
+state 164
 
-    (80) for -> FOR LBRACKET ID sequential_colls . RBRACKET
+    (83) for -> FOR LBRACKET ID sequential_colls . RBRACKET
 
-    RBRACKET        shift and go to state 175
-
-
-state 161
-
-    (65) bool_expression -> LPAREN bool_operation RPAREN .
-
-    LPAREN          reduce using rule 65 (bool_expression -> LPAREN bool_operation RPAREN .)
-    BOOLEAN_TRUE    reduce using rule 65 (bool_expression -> LPAREN bool_operation RPAREN .)
-    BOOLEAN_FALSE   reduce using rule 65 (bool_expression -> LPAREN bool_operation RPAREN .)
-    RPAREN          reduce using rule 65 (bool_expression -> LPAREN bool_operation RPAREN .)
+    RBRACKET        shift and go to state 180
 
 
-state 162
+state 165
+
+    (66) bool_expression -> LPAREN bool_operation RPAREN .
+
+    LPAREN          reduce using rule 66 (bool_expression -> LPAREN bool_operation RPAREN .)
+    BOOLEAN_TRUE    reduce using rule 66 (bool_expression -> LPAREN bool_operation RPAREN .)
+    BOOLEAN_FALSE   reduce using rule 66 (bool_expression -> LPAREN bool_operation RPAREN .)
+    ID              reduce using rule 66 (bool_expression -> LPAREN bool_operation RPAREN .)
+    RPAREN          reduce using rule 66 (bool_expression -> LPAREN bool_operation RPAREN .)
+
+
+state 166
 
     (8) code_block -> LPAREN function RPAREN code_block .
 
     RPAREN          reduce using rule 8 (code_block -> LPAREN function RPAREN code_block .)
 
 
-state 163
+state 167
 
     (9) code_block -> LPAREN general_expression RPAREN code_block .
 
     RPAREN          reduce using rule 9 (code_block -> LPAREN general_expression RPAREN code_block .)
 
 
-state 164
+state 168
 
     (32) vector -> LPAREN VECTOR multipleObjects RPAREN .
 
@@ -2419,7 +2632,7 @@ state 164
     RCURLYBRA       reduce using rule 32 (vector -> LPAREN VECTOR multipleObjects RPAREN .)
 
 
-state 165
+state 169
 
     (43) set -> LPAREN SET multipleObjects RPAREN .
 
@@ -2438,7 +2651,7 @@ state 165
     RCURLYBRA       reduce using rule 43 (set -> LPAREN SET multipleObjects RPAREN .)
 
 
-state 166
+state 170
 
     (37) list -> LPAREN LIST multipleObjects RPAREN .
 
@@ -2457,7 +2670,7 @@ state 166
     RCURLYBRA       reduce using rule 37 (list -> LPAREN LIST multipleObjects RPAREN .)
 
 
-state 167
+state 171
 
     (42) set -> SETDEF LCURLYBRA multipleObjects RCURLYBRA .
 
@@ -2476,7 +2689,7 @@ state 167
     RCURLYBRA       reduce using rule 42 (set -> SETDEF LCURLYBRA multipleObjects RCURLYBRA .)
 
 
-state 168
+state 172
 
     (36) list -> APOSTROPHE LPAREN multipleObjects RPAREN .
 
@@ -2495,81 +2708,88 @@ state 168
     RCURLYBRA       reduce using rule 36 (list -> APOSTROPHE LPAREN multipleObjects RPAREN .)
 
 
-state 169
+state 173
 
-    (83) do -> LPAREN . DO code_block RPAREN
+    (86) do -> LPAREN . DO code_block RPAREN
 
-    DO              shift and go to state 176
-
-
-state 170
-
-    (82) while -> WHILE LPAREN boolean_operation RPAREN do .
-
-    RPAREN          reduce using rule 82 (while -> WHILE LPAREN boolean_operation RPAREN do .)
+    DO              shift and go to state 181
 
 
-state 171
+state 174
+
+    (85) while -> WHILE LPAREN boolean_operation RPAREN do .
+
+    RPAREN          reduce using rule 85 (while -> WHILE LPAREN boolean_operation RPAREN do .)
+
+
+state 175
+
+    (80) variable_expression -> DEF ID LPAREN general_expression RPAREN .
+
+    RPAREN          reduce using rule 80 (variable_expression -> DEF ID LPAREN general_expression RPAREN .)
+
+
+state 176
 
     (44) setFunctions_union -> SET DIVIDE UNION set set .
 
     RPAREN          reduce using rule 44 (setFunctions_union -> SET DIVIDE UNION set set .)
 
 
-state 172
+state 177
 
     (46) setFunctions_intersection -> SET DIVIDE INTERSECTION set set .
 
     RPAREN          reduce using rule 46 (setFunctions_intersection -> SET DIVIDE INTERSECTION set set .)
 
 
-state 173
+state 178
 
     (45) setFunctions_difference -> SET DIVIDE DIFFERENCE set set .
 
     RPAREN          reduce using rule 45 (setFunctions_difference -> SET DIVIDE DIFFERENCE set set .)
 
 
-state 174
+state 179
 
-    (81) for -> FOR LBRACKET ID ID RBRACKET .
+    (84) for -> FOR LBRACKET ID ID RBRACKET .
 
-    LPAREN          reduce using rule 81 (for -> FOR LBRACKET ID ID RBRACKET .)
-
-
-state 175
-
-    (80) for -> FOR LBRACKET ID sequential_colls RBRACKET .
-
-    LPAREN          reduce using rule 80 (for -> FOR LBRACKET ID sequential_colls RBRACKET .)
+    LPAREN          reduce using rule 84 (for -> FOR LBRACKET ID ID RBRACKET .)
 
 
-state 176
+state 180
 
-    (83) do -> LPAREN DO . code_block RPAREN
+    (83) for -> FOR LBRACKET ID sequential_colls RBRACKET .
+
+    LPAREN          reduce using rule 83 (for -> FOR LBRACKET ID sequential_colls RBRACKET .)
+
+
+state 181
+
+    (86) do -> LPAREN DO . code_block RPAREN
     (6) code_block -> . LPAREN function RPAREN
     (7) code_block -> . LPAREN general_expression RPAREN
     (8) code_block -> . LPAREN function RPAREN code_block
     (9) code_block -> . LPAREN general_expression RPAREN code_block
 
-    LPAREN          shift and go to state 52
+    LPAREN          shift and go to state 51
 
-    code_block                     shift and go to state 177
+    code_block                     shift and go to state 182
 
-state 177
+state 182
 
-    (83) do -> LPAREN DO code_block . RPAREN
+    (86) do -> LPAREN DO code_block . RPAREN
 
-    RPAREN          shift and go to state 178
+    RPAREN          shift and go to state 183
 
 
-state 178
+state 183
 
-    (83) do -> LPAREN DO code_block RPAREN .
+    (86) do -> LPAREN DO code_block RPAREN .
 
-    RPAREN          reduce using rule 83 (do -> LPAREN DO code_block RPAREN .)
+    RPAREN          reduce using rule 86 (do -> LPAREN DO code_block RPAREN .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for RBRACKET in state 159 resolved as shift
+WARNING: shift/reduce conflict for RBRACKET in state 163 resolved as shift

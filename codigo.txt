@@ -14,7 +14,7 @@
 (def conjunto (list false "x" 3))
 #
 #4.2. OPERADORES ARITMETICOS
-(+ (* x 10) 4.3)
+(+ (* x 10) 4)
 (+ (-9 20) 10)
 (+ 1 3 4)
 (- 4 2)
@@ -80,8 +80,8 @@
 (def x (list 1 2 3 4))
 (doseq [n x]
 (println n))
-(def x (atom 5))
-(while (< @x 7) (do (println @x) (swap! x inc)))
+(def x 10)
+(while (< x 7) (do (println x) (swap! x inc)))
 (def x (atom 5))
 (if ( = x 2) (println "Son iguales")(println "No son iguales"))
 #TERMINAR EL DOCUMENTO CON UNA LINEA VACIA

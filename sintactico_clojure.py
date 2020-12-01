@@ -123,11 +123,11 @@ def p_setFunctions_intersection(p):
     p[0] = 'SET INTERSECTION'
 
 def p_function_take(p):
-    'function_take : LPAREN TAKE NUMBER sequential_colls'
+    'function_take : TAKE NUMBER sequential_colls'
     p[0] = 'FUNCTION TAKE'
 
 def p_function_drop(p):
-    'function_drop : LPAREN DROP NUMBER sequential_colls'
+    'function_drop : DROP NUMBER sequential_colls'
     p[0] = 'FUNCTION DROP'
 
 
@@ -151,23 +151,24 @@ def p_num_expression(p):
     p[0] = p[2]
 
 def p_operation_plus(p):
-    '''math_operation : PLUS num_expression NUMBER'''
-    p[0] = p[2] + p[3]
+    '''math_operation : PLUS num_expression num_expression'''
+    p[0] = 'Addition'
 
 def p_operation_minus(p):
-    '''math_operation : MINUS num_expression NUMBER'''
-    p[0] = p[2] - p[3]
+    '''math_operation : MINUS num_expression num_expression'''
+    p[0] = 'Subtraction'
 
 def p_operation_divide(p):
-    '''math_operation : DIVIDE num_expression NUMBER'''
-    p[0] = p[2] / p[3]
+    '''math_operation : DIVIDE num_expression num_expression'''
+    p[0] = 'Division'
 
 def p_operation_times(p):
-    '''math_operation : TIMES num_expression NUMBER'''
-    p[0] = p[2] * p[3]
+    '''math_operation : TIMES num_expression num_expression'''
+    p[0] = 'Multiplication'
 
 def p_number(p): 
-    '''num_expression : NUMBER'''
+    '''num_expression : NUMBER
+                      | ID'''
     p[0] = p[1]
 
 ###Operaciones Booleanas - George Henriquez
@@ -182,50 +183,52 @@ def p_boolean_expression(p):
 
 def p_bool_operation_and(p):
      '''bool_operation : AND bool_expression bool_expression'''
-     p[0] = p[2] and p[3]
+     p[0] = 'AND Operation'
 
 def p_bool_operation_or(p):
      '''bool_operation : OR bool_expression bool_expression'''
-     p[0] = p[2] or p[3]
+     p[0] = 'OR Operation'
 
 def p_bool_operation_not(p):
      '''bool_operation : NOT bool_expression'''
-     p[0] = not p[2]
+     p[0] = 'NOT Operation'
 
 def p_bool_type(p):
      '''bool_expression : BOOLEAN_TRUE
-     | BOOLEAN_FALSE'''
+     | BOOLEAN_FALSE
+     | ID'''
      p[0] = p[1]
 
 ###Operaciones de Comparacion - George Henriquez
 def p_compare_operation_greaterthan(p):
      'compare_operation : GREATERTHAN num_expression num_expression'
-     p[0] = p[2] > p[3]
+     p[0] = 'GREATERTHAN Operation'
 
 def p_compare_operation_lessthan(p):
      'compare_operation : LESSTHAN num_expression num_expression'
-     p[0] = p[2] < p[3]
+     p[0] = 'LESSTHAN Operation'
 
 def p_compare_operation_greaterthan_equals(p):
      'compare_operation : GREATERTHANEQUALS num_expression num_expression'
-     p[0] = p[2] >= p[3]
+     p[0] = 'GREATER THAN EQUALS Operation'
 
 def p_compare_operation_lessthan_equals(p):
      'compare_operation : LESSTHANEQUALS num_expression num_expression'
-     p[0] = p[2] <= p[3]
+     p[0] = 'LESS THAN EQUALS Operation'
 
 def p_compare_operation_equal(p):
      'compare_operation : EQUAL num_expression num_expression'
-     p[0] = p[2] == p[3]
+     p[0] = 'EQUAL Operation'
 
 def p_compare_operation_notequal(p):
      'compare_operation : NOTEQUAL num_expression num_expression'
-     p[0] = p[2] != p[3]
+     p[0] = 'NOT EQUAL Operation'
 
 #Definicion de variables
 def p_variable_expression_statemt(p):
-     '''variable_expression : DEF ID multipleObjects''' 
-     p[0] = f'{p[2]} = {p[3]}' 
+     '''variable_expression : DEF ID multipleObjects
+                            | DEF ID LPAREN general_expression RPAREN''' 
+     p[0] = 'Variable Expression' 
 
 #Estructuras de control
 def p_control_structure(p):
