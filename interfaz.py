@@ -1,5 +1,6 @@
 import tkinter as tk
-from lexico_clojure import analizar 
+from lexico_clojure import analizar
+from sintactico_clojure import parser
 
 
 class Ventana:
@@ -39,8 +40,12 @@ class Ventana:
     def sintactico(self):
         self.limpiar()
         self.resultados.config(state="normal")
-        #Analizar el sintactico aqui
-        self.resultados.insert(tk.INSERT, "Aqui falta XD")
+        linea = self.entrada.get(1.0, tk.END) #obtiene el texto de "entrada" 
+        if len(linea)==0:
+            self.resultados.insert(tk.INSERT, "Inserte una linea de codigo!")
+        else:
+            result = parser.parse(linea)
+            self.resultados.insert(tk.INSERT, result)
         self.resultados.config(state="disable")
 
     def lexico(self):

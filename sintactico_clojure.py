@@ -311,6 +311,17 @@ parser = yacc.yacc()
 # prueba1()
 
 # Error rule for syntax errors
+
+"""
+def p_error(token):
+    if token is not None:
+        print ("Line %s, illegal token %s" % (token.lineno, token.value))
+    else:
+        print('ingreso no valido')
+        
+
+codigo no necesario para la interfaz
+"""
 def p_error(p):
     print("Syntax error in input!")
 
