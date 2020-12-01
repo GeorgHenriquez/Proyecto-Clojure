@@ -8,8 +8,16 @@ def p_stament(p):
 
 def p_compute(p):
      '''compute : function
-                | general_expression'''
+                | general_expression
+                | control_structure code_block
+                | while'''
      p[0] = p[1]
+
+def p_code_block(p):
+     '''code_block : LPAREN function RPAREN
+                   | LPAREN general_expression RPAREN
+                   | LPAREN function RPAREN code_block 
+                   | LPAREN general_expression RPAREN code_block '''
 
 ### Funciones escritas por Marck Murillo
 def p_function_println(p):
@@ -129,8 +137,7 @@ def p_function_drop(p):
 ###Operaciones aritmeticas - George Henriquez
 def p_general_expression(p):
     '''general_expression : math_operation
-                          | bool_operation
-                          | compare_operation
+                          | boolean_operation
                           | variable_expression
                           | setFunctions_union
                           | setFunctions_intersection
@@ -164,6 +171,11 @@ def p_number(p):
     p[0] = p[1]
 
 ###Operaciones Booleanas - George Henriquez
+def p_boolean_operation(p):
+     '''boolean_operation : bool_operation
+                          | compare_operation'''
+     p[0] = p[1]
+
 def p_boolean_expression(p):
      'bool_expression : LPAREN bool_operation RPAREN'
      p[0] = p[2]
@@ -216,18 +228,45 @@ def p_variable_expression_statemt(p):
      p[0] = f'{p[2]} = {p[3]}' 
 
 #Estructuras de control
+def p_control_structure(p):
+     '''control_structure : if
+                          | for'''
+     p[0] = p[1]
+
 def p_for(p):
-    '''for : LPAREN FOR LBRACKET ID sequential_col RBRACKET general_expression RPAREN
-    | FOR LBRACKET ID ID RBRACKET general_expression RPAREN'''
+    '''for : FOR LBRACKET ID sequential_colls RBRACKET
+           | FOR LBRACKET ID ID RBRACKET'''
+    p[0] = 'for'
 
 def p_while(p):
-    '''while : LPAREN WHILE LPAREN compare_operation RPAREN LPAREN DO general_expression general_expression RPAREN RPAREN'''
+     '''while : WHILE LPAREN boolean_operation RPAREN do'''
+     p[0] = 'while'
+
+def p_do_statement(p):
+     'do : LPAREN DO code_block RPAREN'
+     p[0] = 'do'
 
 def p_if(p):
-    '''if : LPAREN IF LPAREN compare_operation RPAREN LPAREN general_expression general_expression RPAREN'''
+    '''if : IF LPAREN boolean_operation RPAREN '''
+    p[0] = 'if'
+
+
+
+# Error rule for syntax errors
+def p_error(p):
+    print("Syntax error in input!")
 
 # Build the parser
 parser = yacc.yacc()
+
+while True:
+   try:
+       s = input('clojure > ')
+   except EOFError:
+       break
+   if not s: continue
+   result = parser.parse(s)
+   print(result)
 
 # #Funcion para probar -Henriquez
 # def prueba():
@@ -318,22 +357,6 @@ parser = yacc.yacc()
 
 # prueba()
 # prueba1()
-
-# Error rule for syntax errors
-def p_error(p):
-    print("Syntax error in input!")
-
-
-
-while True:
-   try:
-       s = input('clojure > ')
-   except EOFError:
-       break
-   if not s: continue
-   result = parser.parse(s)
-   print(result)
-
 
 
 
