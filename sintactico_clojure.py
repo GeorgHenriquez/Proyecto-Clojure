@@ -215,7 +215,16 @@ def p_variable_expression_statemt(p):
      '''variable_expression : DEF ID multipleObjects''' 
      p[0] = f'{p[2]} = {p[3]}' 
 
+#Estructuras de control
+def p_for(p):
+    '''for : LPAREN FOR LBRACKET ID sequential_col RBRACKET general_expression RPAREN
+    | FOR LBRACKET ID ID RBRACKET general_expression RPAREN'''
 
+def p_while(p):
+    '''while : LPAREN WHILE LPAREN compare_operation RPAREN LPAREN DO general_expression general_expression RPAREN RPAREN'''
+
+def p_if(p):
+    '''if : LPAREN IF LPAREN compare_operation RPAREN LPAREN general_expression general_expression RPAREN'''
 
 # Build the parser
 parser = yacc.yacc()
