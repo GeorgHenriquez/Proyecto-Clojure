@@ -45,7 +45,11 @@ class Ventana:
             self.resultados.insert(tk.INSERT, "Inserte una linea de codigo!")
         else:
             result = parser.parse(linea)
-            self.resultados.insert(tk.INSERT, result)
+            if result is not None:
+                self.resultados.insert(tk.INSERT, result)
+            else:
+                f = open("log.txt", "r")
+                self.resultados.insert(tk.INSERT, f.read())
         self.resultados.config(state="disable")
 
     def lexico(self):

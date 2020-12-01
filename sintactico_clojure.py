@@ -212,12 +212,14 @@ def p_compare_operation_notequal(p):
 
 #Definicion de variables
 def p_variable_expression_statemt(p):
-     '''variable_expression : DEF ID multipleObjects''' 
+     '''variable_expression : DEF ID value
+                            | DEF ID sequential_colls
+                            | DEF ID stament''' 
      p[0] = f'{p[2]} = {p[3]}' 
 
 #Estructuras de control
 def p_for(p):
-    '''for : LPAREN FOR LBRACKET ID sequential_col RBRACKET general_expression RPAREN
+    '''for : LPAREN FOR LBRACKET ID sequential_colls RBRACKET general_expression RPAREN
     | FOR LBRACKET ID ID RBRACKET general_expression RPAREN'''
 
 def p_while(p):
@@ -225,6 +227,28 @@ def p_while(p):
 
 def p_if(p):
     '''if : LPAREN IF LPAREN compare_operation RPAREN LPAREN general_expression general_expression RPAREN'''
+
+
+#funciones de error
+
+"""
+def p_error(token):
+    if token is not None:
+        print ("El token '%s' no es valido ( linea %s )" % (token.value, token.lineno))
+    else:
+        print('ingreso no valido')
+"""
+
+
+#funcion de error para la interfaz        
+def p_error(token):
+     log = open("log.txt", "w")
+     if token is not None:
+          print ("El token '%s' no es valido ( linea %s )" % (token.value, token.lineno), file = log)
+     else:
+          print('ingreso no valido', file = log)
+
+
 
 # Build the parser
 parser = yacc.yacc()
@@ -319,23 +343,7 @@ parser = yacc.yacc()
 # prueba()
 # prueba1()
 
-# Error rule for syntax errors
-
 """
-def p_error(token):
-    if token is not None:
-        print ("Line %s, illegal token %s" % (token.lineno, token.value))
-    else:
-        print('ingreso no valido')
-        
-
-codigo no necesario para la interfaz
-"""
-def p_error(p):
-    print("Syntax error in input!")
-
-
-
 while True:
    try:
        s = input('clojure > ')
@@ -345,10 +353,5 @@ while True:
    result = parser.parse(s)
    print(result)
 
-
-
-
-
-
-
+"""
    
