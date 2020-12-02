@@ -10,7 +10,8 @@ def p_compute(p):
      '''compute : function
                 | general_expression
                 | control_structure code_block
-                | while'''
+                | while
+                | require'''
      p[0] = p[1]
 
 def p_code_block(p):
@@ -57,9 +58,9 @@ def p_function_sequence(p):
      
 def p_multipleObjects(p):
      '''multipleObjects : value
-                        | value multipleObjects
                         | sequential_colls
-                        | sequential_colls multipleObjects'''
+                        | stament
+                        | multipleObjects multipleObjects'''
      p[0] = p[1]
      
 def p_value(p):
@@ -132,6 +133,10 @@ def p_function_drop(p):
     'function_drop : DROP NUMBER sequential_colls'
     p[0] = 'FUNCTION DROP'
 
+def p_require(p):
+     '''require : REQUIRE APOSTROPHE LBRACKET ID POINT ID DOUBLE_POINT AS ID RBRACKET
+                | REQUIRE APOSTROPHE LBRACKET ID POINT SET DOUBLE_POINT AS ID RBRACKET'''
+     p[0] = "REQUIRE_FUNCTION"
 
 ### Fin funciones escritas por Franklin Ordóñez
 
@@ -284,7 +289,6 @@ def p_error(token):
           print("Ingreso no valido ( linea", file = log)
 
 
-
 # Build the parser
 parser = yacc.yacc()
 
@@ -390,4 +394,3 @@ while True:
    print(result)
 
 """
-

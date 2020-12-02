@@ -46,7 +46,6 @@
 (seq "foo")
 #
 #4.8. FUNCIONES CON ARREGLOS
-([1 2 3])
 (get ["abc" false 99] 0)
 (count [1 2 3])
 (conj [1 2 3] 4 5 6)
