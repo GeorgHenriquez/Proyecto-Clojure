@@ -33,15 +33,16 @@ def p_function_empty(p):
      p[0] = 'FUNCTION_EMPTY'
 
 def p_multiplestring(p):
-     '''multiplestring : STRING
-                        | STRING multiplestring
-                        | stament
-                        | stament multiplestring'''
-     p[0] = p[1]
+    '''multiplestring : STRING
+                      | STRING multiplestring
+                      | stament
+                      | stament multiplestring'''
+    p[0] = p[1]
+
                          
 def p_function_str(p):
      'function : TYPE_STR multiplestring'
-     p[0] = 'FUNCTION_STR'
+     p[0] = "CONCATENATION_STR"
 
 def p_function_subString(p):
      '''function : FUNCTION_SUB STRING NUMBER

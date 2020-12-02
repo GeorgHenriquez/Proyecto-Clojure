@@ -75,5 +75,5 @@ root.iconphoto(False, tk.PhotoImage(file='clojure.png'))
 root.geometry("600x400")
 ventana = Ventana(root)
 
-#inicia el blucle infinito del programa
+#inicia el bucle infinito del programa
 root.mainloop()
