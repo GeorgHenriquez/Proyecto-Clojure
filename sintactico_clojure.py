@@ -229,7 +229,7 @@ def p_variable_expression_statemt(p):
      '''variable_expression : DEF ID value
                             | DEF ID sequential_colls
                             | DEF ID stament''' 
-     p[0] = f'{p[2]} = {p[3]}' 
+     p[0] = 'Variable Expression'
 
 
 #Estructuras de control
@@ -241,25 +241,25 @@ def p_control_structure(p):
 def p_for(p):
     '''for : FOR LBRACKET ID sequential_colls RBRACKET
            | FOR LBRACKET ID ID RBRACKET'''
-    p[0] = 'for'
+    p[0] = 'FOR Statement'
 
 def p_while(p):
      '''while : WHILE LPAREN boolean_operation RPAREN do'''
-     p[0] = 'while'
+     p[0] = 'WHILE Statement'
 
 def p_do_statement(p):
      'do : LPAREN DO code_block RPAREN'
-     p[0] = 'do'
+     p[0] = 'DO Statement'
 
 def p_if(p):
     '''if : IF LPAREN boolean_operation RPAREN '''
-    p[0] = 'if'
+    p[0] = 'IF Statement'
 
 
 
 # Error rule for syntax errors
-def p_error(p):
-    print("Syntax error in input!")
+# def p_error(p):
+#     print("Syntax error in input!")
 
 
 #funciones de error
@@ -277,9 +277,9 @@ def p_error(token):
 def p_error(token):
      log = open("log.txt", "w")
      if token is not None:
-          print ("El token '%s' no es valido ( linea %s )" % (token.value, token.lineno), file = log)
+          print ("El token '%s' no es valido ( linea" % (token.value), file = log)
      else:
-          print('ingreso no valido', file = log)
+          print("Ingreso no valido ( linea", file = log)
 
 
 

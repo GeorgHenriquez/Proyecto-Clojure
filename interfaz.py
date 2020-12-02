@@ -41,15 +41,23 @@ class Ventana:
         self.limpiar()
         self.resultados.config(state="normal")
         linea = self.entrada.get(1.0, tk.END) #obtiene el texto de "entrada" 
-        if len(linea)==0:
+        if len(linea) == 1:
             self.resultados.insert(tk.INSERT, "Inserte una linea de codigo!")
         else:
-            result = parser.parse(linea)
-            if result is not None:
-                self.resultados.insert(tk.INSERT, result)
-            else:
-                f = open("log.txt", "r")
-                self.resultados.insert(tk.INSERT, f.read())
+            i = 1.0
+            while True:
+                linea = self.entrada.get(i, f'{i+1} -1 chars')
+                result = parser.parse(linea)
+                if result is not None:
+                    self.resultados.insert(tk.INSERT, f"linea {int(i)}: {result}")
+                else:
+                    if(len(linea) == 0): break
+                    f = open("log.txt", "r")
+                    error = f.read().rstrip('\n')
+                    self.resultados.insert(tk.INSERT, f"<< {error} {int(i)} ) >>")
+                    break
+                self.resultados.insert(tk.INSERT, "\n")
+                i = i + 1
         self.resultados.config(state="disable")
 
     def lexico(self):
