@@ -81,8 +81,8 @@
 (doseq [n x]
 (println n))
 (def x 10)
-(while (< x 7) (do (println x) (swap! x inc)))
-(def x (atom 5))
+(while (< x 7) (do (println x) (def x (+ x 1))))
+(def x (+ 2 5))
 (if ( = x 2) (println "Son iguales")(println "No son iguales"))
 #TERMINAR EL DOCUMENTO CON UNA LINEA VACIA
 

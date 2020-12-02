@@ -66,7 +66,8 @@ def p_value(p):
               | NUMBER
               | FLOAT
               | BOOLEAN_TRUE
-              | BOOLEAN_FALSE'''
+              | BOOLEAN_FALSE
+              | NULL'''
      p[0] = p[1]
 
 def p_vector(p):
