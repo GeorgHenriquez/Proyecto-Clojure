@@ -17,8 +17,10 @@ def p_compute(p):
 def p_code_block(p):
      '''code_block : LPAREN function RPAREN
                    | LPAREN general_expression RPAREN
+                   | LPAREN compute RPAREN
+                   | LPAREN compute RPAREN code_block 
                    | LPAREN function RPAREN code_block 
-                   | LPAREN general_expression RPAREN code_block '''
+                   | LPAREN general_expression RPAREN code_block'''
 
 ### Funciones escritas por Marck Murillo
 def p_function_println(p):
@@ -35,9 +37,10 @@ def p_function_empty(p):
 
 def p_multiplestring(p):
     '''multiplestring : STRING
-                      | STRING multiplestring
                       | stament
-                      | stament multiplestring'''
+                      | value
+                      | ID
+                      | multiplestring multiplestring'''
     p[0] = p[1]
 
                          
@@ -208,34 +211,47 @@ def p_bool_type(p):
 
 ###Operaciones de Comparacion - George Henriquez
 def p_compare_operation_greaterthan(p):
-     'compare_operation : GREATERTHAN num_expression num_expression'
+     '''compare_operation : GREATERTHAN num_expression num_expression
+                          | GREATERTHAN num_expression NULL
+                          | GREATERTHAN NULL num_expression'''
      p[0] = 'GREATERTHAN Operation'
 
 def p_compare_operation_lessthan(p):
-     'compare_operation : LESSTHAN num_expression num_expression'
+     '''compare_operation : LESSTHAN num_expression num_expression
+                          | LESSTHAN num_expression NULL
+                          | LESSTHAN NULL num_expression'''
      p[0] = 'LESSTHAN Operation'
 
 def p_compare_operation_greaterthan_equals(p):
-     'compare_operation : GREATERTHANEQUALS num_expression num_expression'
+     '''compare_operation : GREATERTHANEQUALS num_expression num_expression
+                          | GREATERTHANEQUALS num_expression NULL
+                          | GREATERTHANEQUALS NULL num_expression'''
      p[0] = 'GREATER THAN EQUALS Operation'
 
 def p_compare_operation_lessthan_equals(p):
-     'compare_operation : LESSTHANEQUALS num_expression num_expression'
+     '''compare_operation : LESSTHANEQUALS num_expression num_expression
+                          | LESSTHANEQUALS num_expression NULL
+                          | LESSTHANEQUALS NULL num_expression'''
      p[0] = 'LESS THAN EQUALS Operation'
 
 def p_compare_operation_equal(p):
-     'compare_operation : EQUAL num_expression num_expression'
+     '''compare_operation : EQUAL num_expression num_expression
+                          | EQUAL num_expression NULL
+                          | EQUAL NULL num_expression'''
      p[0] = 'EQUAL Operation'
 
 def p_compare_operation_notequal(p):
-     'compare_operation : NOTEQUAL num_expression num_expression'
+     '''compare_operation : NOTEQUAL num_expression num_expression
+                          | NOTEQUAL num_expression NULL
+                          | NOTEQUAL NULL num_expression'''
      p[0] = 'NOT EQUAL Operation'
 
 #Definicion de variables
 def p_variable_expression_statemt(p):
      '''variable_expression : DEF ID value
                             | DEF ID sequential_colls
-                            | DEF ID stament''' 
+                            | DEF ID stament
+                            | DEF NULL''' 
      p[0] = 'Variable Expression'
 
 
@@ -270,8 +286,8 @@ def p_if(p):
 
 
 #funciones de error
-
 """
+
 def p_error(token):
     if token is not None:
         print ("El token '%s' no es valido ( linea %s )" % (token.value, token.lineno))
@@ -382,8 +398,8 @@ parser = yacc.yacc()
 
 # prueba()
 # prueba1()
-
 """
+
 while True:
    try:
        s = input('clojure > ')
@@ -392,5 +408,5 @@ while True:
    if not s: continue
    result = parser.parse(s)
    print(result)
-
 """
+
