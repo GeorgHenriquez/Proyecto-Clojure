@@ -22,7 +22,6 @@ tokens = (
 'RCURLYBRA',
 'SETDEF',
 'ID',
-'FLOAT',
 'EQUAL',
 'NOTEQUAL',
 'STRING',
@@ -47,7 +46,6 @@ t_RPAREN  = r'\)'
 t_LCURLYBRA = r'\{'
 t_RCURLYBRA = r'\}'
 t_SETDEF = r'\#'
-t_FLOAT = r'\d+\.\d+'
 t_EQUAL =  r'='
 t_NOTEQUAL =  r'not='
 t_GREATERTHAN = r'\>'

@@ -69,7 +69,6 @@ def p_multipleObjects(p):
 def p_value(p):
      '''value : STRING
               | NUMBER
-              | FLOAT
               | BOOLEAN_TRUE
               | BOOLEAN_FALSE
               | NULL'''
@@ -417,5 +416,5 @@ while True:
    if not s: continue
    result = parser.parse(s)
    print(result)
-<<<<<<< HEAD
 """
+
