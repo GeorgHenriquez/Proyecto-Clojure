@@ -1,8 +1,8 @@
 import ply.lex as lex
 
 # Reserved words
-reserved = {'def': 'DEF', 'defn': 'DEFN', 'nil': 'NULL', 'true': 'BOOLEAN_TRUE', 'false': 'BOOLEAN_FALSE',
-            'and': 'AND', 'or': 'OR', 'not': 'NOT', 'if': 'IF', 'else': 'ELSE', 'println': 'FUNCTION_PRINTLN',
+reserved = {'def': 'DEF', 'nil': 'NULL', 'true': 'BOOLEAN_TRUE', 'false': 'BOOLEAN_FALSE',
+            'and': 'AND', 'or': 'OR', 'not': 'NOT', 'if': 'IF', 'println': 'FUNCTION_PRINTLN',
             'set': 'SET', 'union': 'UNION', 'difference': 'DIFFERENCE', 'intersection': 'INTERSECTION',
             'while':'WHILE', 'do':'DO', 'doseq':'FOR', 'read-line':'READLINE', 'empty?':'FUNCTION_EMPTY',
             'str':'TYPE_STR', 'subs':'FUNCTION_SUB', 'seq':'FUNCTION_SEQ', 'get':'FUNCTION_GET', 'count':'FUNCTION_COUNT',
@@ -33,12 +33,8 @@ tokens = (
 'APOSTROPHE',
 'LBRACKET',
 'RBRACKET',
-'QUESTION',
 'DOUBLE_POINT',
 'POINT',
-'PERCENTAJE',
-'AT',
-'EXCLAMATION'
 ) + tuple(reserved.values())
 
 # Regular expression rules for simple tokens
@@ -51,7 +47,6 @@ t_RPAREN  = r'\)'
 t_LCURLYBRA = r'\{'
 t_RCURLYBRA = r'\}'
 t_SETDEF = r'\#'
-#t_NUMBER = r'\d+'
 t_FLOAT = r'\d+\.\d+'
 t_EQUAL =  r'='
 t_NOTEQUAL =  r'not='
@@ -62,12 +57,8 @@ t_LESSTHANEQUALS  = r'\<\='
 t_APOSTROPHE = r'\''
 t_LBRACKET  = r'\['
 t_RBRACKET  = r'\]'
-t_QUESTION  = r'\?'
 t_DOUBLE_POINT  = r'\:'
 t_POINT  = r'\.'
-t_PERCENTAJE  = r'\%'
-t_AT  = r'\@'
-t_EXCLAMATION  = r'\!'
 
 
 #Esta ER fue añadidad para poder obtener el resultado de las operaciones

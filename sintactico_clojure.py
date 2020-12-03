@@ -80,6 +80,11 @@ def p_vector(p):
                | LPAREN VECTOR multipleObjects RPAREN'''
      p[0] = 'VECTOR'
 
+def p_function_nth(p):
+     '''function : FUNCTION_NTH vector NUMBER
+            | FUNCTION_NTH list NUMBER
+            | FUNCTION_NTH ID NUMBER'''
+     p[0] = 'FUNCTION NTH'
 
 def p_function_get(p):
      'function : FUNCTION_GET sequential_colls NUMBER'
@@ -116,16 +121,21 @@ def p_set(p):
              | LPAREN SET multipleObjects RPAREN'''
      p[0] = 'SET'
 
+def p_set_operation(p):
+     '''set_op : set
+              | ID'''
+     p[0] = p[1]
+
 def p_setFunctions_union(p):
-    'setFunctions_union : SET DIVIDE UNION set set'
+    'setFunctions_union : SET DIVIDE UNION set_op set_op'
     p[0] = 'SET UNION'
 
 def p_setFunctions_difference(p):
-    'setFunctions_difference : SET DIVIDE DIFFERENCE set set'
+    'setFunctions_difference : SET DIVIDE DIFFERENCE set_op set_op'
     p[0] = 'SET DIFFERENCE'
 
 def p_setFunctions_intersection(p):
-    'setFunctions_intersection : SET DIVIDE INTERSECTION set set'
+    'setFunctions_intersection : SET DIVIDE INTERSECTION set_op set_op'
     p[0] = 'SET INTERSECTION'
 
 def p_function_take(p):
@@ -399,7 +409,6 @@ parser = yacc.yacc()
 # prueba()
 # prueba1()
 """
-
 while True:
    try:
        s = input('clojure > ')
@@ -408,5 +417,5 @@ while True:
    if not s: continue
    result = parser.parse(s)
    print(result)
+<<<<<<< HEAD
 """
-
