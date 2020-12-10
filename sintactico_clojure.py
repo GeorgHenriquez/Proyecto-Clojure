@@ -170,24 +170,32 @@ def p_num_expression(p):
     p[0] = p[2]
 
 def p_operation_plus(p):
-    '''math_operation : PLUS num_expression num_expression'''
+    '''math_operation : PLUS multipleNumbers num_expression
+                       | PLUS multipleNumbers'''
     p[0] = 'Addition'
 
 def p_operation_minus(p):
-    '''math_operation : MINUS num_expression num_expression'''
+    '''math_operation : MINUS multipleNumbers num_expression
+                       | MINUS multipleNumbers'''
     p[0] = 'Subtraction'
 
 def p_operation_divide(p):
-    '''math_operation : DIVIDE num_expression num_expression'''
+    '''math_operation : DIVIDE multipleNumbers num_expression
+                       | DIVIDE multipleNumbers'''
     p[0] = 'Division'
 
 def p_operation_times(p):
-    '''math_operation : TIMES num_expression num_expression'''
+    '''math_operation : TIMES multipleNumbers num_expression
+                       | TIMES multipleNumbers'''
     p[0] = 'Multiplication'
 
 def p_number(p): 
     '''num_expression : NUMBER
                       | ID'''
+    p[0] = p[1]
+def p_multipleNumbers(p):
+    '''multipleNumbers : multipleNumbers num_expression
+                       | num_expression'''
     p[0] = p[1]
 
 ###Operaciones Booleanas - George Henriquez

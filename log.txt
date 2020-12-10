@@ -1,1 +1,1 @@
-Ingreso no valido ( linea
+El token 'list' no es valido ( linea
